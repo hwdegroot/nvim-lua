@@ -61,13 +61,24 @@ packer.startup(function(use)
     }
 
     use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
 end)
 
 --require('plugins.lualine').setup()
 require('lualine').setup {
     options = { theme = 'powerline' }
 }
+
+require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end
+})
+
 require('plugins.sign').setup()
 require('plugins.nvimtree').setup()
 require('plugins.devicons').setup()
+--require('plugins.indent').setup()
 
