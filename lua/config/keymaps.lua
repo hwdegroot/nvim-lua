@@ -1,9 +1,9 @@
-local xmap = require "settings.utils".xmap
+local xmap = require('config.utils').xmap
 
 
 -- telescope search
 local telescope = require('telescope.builtin')
-xmap('<C-f>', telescope.find_files)
+xmap('<C-p>', telescope.find_files)
 xmap('<C-t>g', telescope.live_grep)
 xmap('<C-t>b', telescope.buffers)
 xmap('<C-t>h', telescope.help_tags)
