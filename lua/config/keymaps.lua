@@ -1,4 +1,5 @@
-local xmap = require('config.utils').xmap
+local utils = require('config.utils')
+local xmap, nmap = utils.xmap, utils.nmap
 
 
 -- telescope search
@@ -35,6 +36,11 @@ xmap('<Esc>[1;2D', '<S-Left>')
 -- Move lines up and down
 xmap('<C-Down>', 'm .+1<CR>==')
 xmap('<C-Up>', 'm .-2<CR>==')
+
+-- UFO
+local ufo = require('ufo')
+nmap('zR', ufo.openAllFolds)
+nmap('zM', ufo.closeAllFolds)
 
 --nnoremap <C-l> :buffers!<CR>:buffer<Space>
 --noremap <silent> <C-d>b :diffg BA<CR>

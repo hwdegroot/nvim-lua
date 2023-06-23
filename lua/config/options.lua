@@ -4,20 +4,22 @@ vim.opt.compatible = false
 vim.opt.cursorline = true
 vim.opt.encoding = 'utf-8'
 vim.opt.expandtab = true
+vim.opt.foldcolumn = '1' -- '0' is not bad
 vim.opt.foldenable = false
-vim.opt.foldlevelstart = 10
+vim.opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.opt.foldlevelstart = 99
 vim.opt.foldnestmax = 10
 vim.opt.hidden = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.laststatus = 2
 vim.opt.lazyredraw = true
-vim.opt.list = true 
+vim.opt.list = true
 vim.opt.listchars= 'eol:↲,trail:·,tab:»·,extends:»,precedes:«'
 vim.opt.modifiable = true
 vim.opt.number = true
 vim.opt.shiftwidth = 4
-vim.opt.showmatch = true 
+vim.opt.showmatch = true
 vim.opt.signcolumn = 'yes'
 vim.opt.smartindent = true
 vim.opt.softtabstop = 4
@@ -25,6 +27,8 @@ vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.updatetime = 300
 vim.opt.wildmenu = true
+
+
 
 --vim.opt.clipboard += 'unnamedplus'
 --vim.opt.shortmess += c
