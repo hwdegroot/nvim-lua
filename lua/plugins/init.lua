@@ -41,7 +41,7 @@ packer.startup(function(use)
         'willothy/nvim-cokeline',
         requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
         config = function()
-            require('cokeline').setup()
+            require('plugins.cokeline').setup()
         end
     }
 
@@ -63,6 +63,7 @@ packer.startup(function(use)
     use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use { "ellisonleao/gruvbox.nvim" }
 
 end)
 
@@ -78,6 +79,5 @@ require('ufo').setup({
 require('plugins.sign').setup()
 require('plugins.nvimtree').setup()
 require('plugins.devicons').setup()
-require('plugins.cokeline').setup()
 --require('plugins.indent').setup()
 

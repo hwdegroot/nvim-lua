@@ -1,3 +1,4 @@
+vim.opt.background = 'dark'
 vim.opt.backspace = '2'
 vim.opt.cmdheight = 2
 vim.opt.compatible = false

@@ -34,8 +34,8 @@ xmap('<Esc>[0;2C', '<S-Right>')
 xmap('<Esc>[1;2D', '<S-Left>')
 
 -- Move lines up and down
-xmap('<C-Down>', 'm .+1<CR>==')
-xmap('<C-Up>', 'm .-2<CR>==')
+xmap('<C-Down>', ':m .+1<CR>==')
+xmap('<C-Up>', ':m .-2<CR>==')
 
 -- UFO
 local ufo = require('ufo')

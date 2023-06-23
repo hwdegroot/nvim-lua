@@ -1,5 +1,5 @@
 vim.cmd[[
 syntax enable
-colorscheme night-owl
+colorscheme gruvbox
 ]]
 --vim.g.lightline = { 'colorscheme' = 'nightowl' }
