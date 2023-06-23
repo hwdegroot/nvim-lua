@@ -29,11 +29,6 @@ packer.startup(function(use)
 
     use 'haishanh/night-owl.vim'
 
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-    }
-
     use 'tpope/vim-fugitive'
     use 'lewis6991/gitsigns.nvim'
 
@@ -41,7 +36,7 @@ packer.startup(function(use)
         'willothy/nvim-cokeline',
         requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
         config = function()
-            require('plugins.cokeline').setup()
+            require('plugins.cokeline')
         end
     }
 
@@ -64,11 +59,30 @@ packer.startup(function(use)
 
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use { "ellisonleao/gruvbox.nvim" }
+    --use {
+    --    'nvim-lualine/lualine.nvim',
+    --    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    --}
 
+    use({
+        'glepnir/galaxyline.nvim',
+        branch = 'main',
+        -- your statusline
+        config = function()
+            require('plugins.galaxyline')
+        end,
+        -- some optional icons
+        requires = {
+            'nvim-tree/nvim-web-devicons',
+            opt = true,
+            'folke/tokyonight.nvim'
+        },
+
+    })
 end)
 
 --require('plugins.lualine').setup()
-require('plugins.lualine').setup()
+--require('plugins.lualine').setup()
 
 require('ufo').setup({
     provider_selector = function(bufnr, filetype, buftype)
