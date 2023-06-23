@@ -9,7 +9,7 @@ local comments_fg = get_hex('Comment', 'fg')
 local errors_fg = get_hex('DiagnosticError', 'fg')
 local warnings_fg = get_hex('DiagnosticWarn', 'fg')
 
-local min_buffer_width = 23
+local min_buffer_width = 10
 
 local activeColor = '#4a99d6'
 

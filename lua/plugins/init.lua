@@ -45,9 +45,19 @@ packer.startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-vsnip'
-    use 'hrsh7th/vim-vsnip'
+    use {
+        'hrsh7th/nvim-cmp',
+        config = function()
+            require('plugins.cmp')
+        end,
+        requires = {
+            'onsails/lspkind.nvim',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+            --'hrsh7th/cmp-vsnip',
+            --'hrsh7th/vim-vsnip',
+        },
+    }
 
     use {
         'williamboman/mason.nvim',
