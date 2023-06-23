@@ -8,7 +8,7 @@ packer.startup(function(use)
         'glepnir/dashboard-nvim',
         event = 'VimEnter',
         config = function ()
-            require('dashboard').setup {}
+            require('dashboard').setup()
         end,
         requires = {'nvim-tree/nvim-web-devicons'}
     }
@@ -67,9 +67,7 @@ packer.startup(function(use)
 end)
 
 --require('plugins.lualine').setup()
-require('lualine').setup {
-    options = { theme = 'powerline' }
-}
+require('plugins.lualine').setup()
 
 require('ufo').setup({
     provider_selector = function(bufnr, filetype, buftype)
@@ -80,5 +78,6 @@ require('ufo').setup({
 require('plugins.sign').setup()
 require('plugins.nvimtree').setup()
 require('plugins.devicons').setup()
+require('plugins.cokeline').setup()
 --require('plugins.indent').setup()
 

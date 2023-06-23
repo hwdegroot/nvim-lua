@@ -1,5 +1,5 @@
 local utils = require('config.utils')
-local nmap, vmap = utils.nmap, utils.imap, utils.vmap
+local nmap, vmap = utils.nmap, utils.vmap
 local M = {}
 function M.setup()
     require("gitsigns").setup {

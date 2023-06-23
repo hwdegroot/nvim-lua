@@ -26,8 +26,8 @@ xmap('<C-S-Right>', '<C-w>l')
 -- Fix random character navigation
 xmap('<Esc>[1;5A', '<C-Up>')
 xmap('<Esc>[1;5B', '<C-Down>')
-xmap('<Esc>[1;5C', '<C-Right>')
-xmap('<Esc>[1;5D', '<C-Left>')
+--xmap('<Esc>[1;5C', '<C-Right>')
+--xmap('<Esc>[1;5D', '<C-Left>')
 xmap('<Esc>[1;2A', '<S-Up>')
 xmap('<Esc>[1;2B', '<S-Down>')
 xmap('<Esc>[0;2C', '<S-Right>')
@@ -41,6 +41,13 @@ xmap('<C-Up>', 'm .-2<CR>==')
 local ufo = require('ufo')
 nmap('zR', ufo.openAllFolds)
 nmap('zM', ufo.closeAllFolds)
+
+-- cokeline
+nmap("<C-Right>", "<Plug>(cokeline-focus-next)")
+nmap("<C-Left>", "<Plug>(cokeline-focus-prev)")
+nmap("<M-Left>", "<Plug>(cokeline-switch-prev)")
+nmap("<M-Right>", "<Plug>(cokeline-switch-next)")
+
 
 --nnoremap <C-l> :buffers!<CR>:buffer<Space>
 --noremap <silent> <C-d>b :diffg BA<CR>

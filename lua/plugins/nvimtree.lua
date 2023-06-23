@@ -1,7 +1,13 @@
 local M = {}
+local nvimtree, api = require('nvim-tree'), require('nvim-tree.api')
+
+-- https://github.com/nvim-tree/nvim-tree.lua/issues/424
+api.events.subscribe(api.events.Event.TreeOpen, function ()
+    vim.wo.statusline = ' '
+end)
 
 function M.setup()
-  require("nvim-tree").setup {
+  nvimtree.setup {
     disable_netrw = true,
     hijack_netrw = true,
     view = {
