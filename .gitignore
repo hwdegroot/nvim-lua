@@ -1,0 +1,4 @@
+*.sw[a-z]
+.vscode/
+.idea/
+plugin/packer_compiled.lua
