@@ -1,6 +1,48 @@
+local utils = require('config.utils')
+local nmap, vmap = utils.nmap, utils.imap, utils.vmap
 local M = {}
 function M.setup()
     require("gitsigns").setup {
+        on_attach = function(bufnr)
+            local gs = package.loaded.gitsigns
+
+            local function map(mode, l, r, opts)
+                opts = opts or {}
+                opts.buffer = bufnr
+                vim.keymap.set(mode, l, r, opts)
+            end
+
+            -- Navigation
+            nmap('<C-]>c', function()
+                if vim.wo.diff then return ']c' end
+                vim.schedule(function() gs.next_hunk() end)
+                return '<Ignore>'
+            end, {expr=true})
+
+            nmap('<C-[>c', function()
+                if vim.wo.diff then return '[c' end
+                vim.schedule(function() gs.prev_hunk() end)
+                return '<Ignore>'
+            end, {expr=true})
+
+            -- Actions
+            nmap('<C-h>s', gs.stage_hunk)
+            nmap('<C-h>r', gs.reset_hunk)
+            vmap('<C-h>s', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+            vmap('<C-h>r', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+            nmap('<C-h>S', gs.stage_buffer)
+            nmap('<C-h>u', gs.undo_stage_hunk)
+            nmap('<C-h>R', gs.reset_buffer)
+            nmap('<C-h>p', gs.preview_hunk)
+            nmap('<C-h>b', function() gs.blame_line{full=true} end)
+            nmap('<C-t>b', gs.toggle_current_line_blame)
+            nmap('<C-h>d', gs.diffthis)
+            nmap('<C-h>D', function() gs.diffthis('~') end)
+            nmap('<C-t>d', gs.toggle_deleted)
+
+            -- Text object
+            map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+        end,
         signs = {
             -- add = {text = "", numhl = "GitGutterAdd"},
             -- change = {text = "", numhl = "GitGutterChange"},
@@ -49,19 +91,6 @@ function M.setup()
             } --]]
         },
         numhl = true,
-        keymaps = {
-            noremap = true,
-            buffer = true,
-            ["n ]g"] = {expr = true, '&diff ? \']g\' : \'<cmd>lua require"gitsigns".next_hunk()<CR>\''},
-            ["n [g"] = {expr = true, '&diff ? \'[g\' : \'<cmd>lua require"gitsigns".prev_hunk()<CR>\''},
-            ["n <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-            ["n <leader>hu"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-            ["n <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-            ["n <leader>hp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-            ["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-            ["n <leader>ha"] = '<cmd>lua require"gitsigns".attach()<CR>',
-            ["n <leader>hd"] = '<cmd>lua require"gitsigns".detach_all()<CR>'
-        },
         watch_gitdir = {
             interval = 1000,
             follow_files = true

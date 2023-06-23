@@ -59,6 +59,8 @@ packer.startup(function(use)
         run = ':MasonUpdate', -- :MasonUpdate updates registry contents
         'williamboman/mason-lspconfig.nvim',
     }
+
+    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 end)
 
 --require('plugins.lualine').setup()

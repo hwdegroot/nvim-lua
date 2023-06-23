@@ -1,10 +1,10 @@
 -- vim.cmd [[packadd telescope-fzy-native.nvim]]
-local map = require "settings.utils".map
-local finders = require "telescope.builtin"
-local actions = require "telescope.actions"
-local telescope = require "telescope"
-local sorters = require "telescope.sorters"
-local previewers = require "telescope.previewers"
+local map = require("config.utils").map
+local finders = require("telescope.builtin")
+local actions = require("telescope.actions")
+local telescope = require("telescope")
+local sorters = require("telescope.sorters")
+local previewers = require("telescope.previewers")
 local transform_mod = require("telescope.actions.mt").transform_mod
 
 -- require("telescope").load_extension("fzy_native")
