@@ -105,3 +105,5 @@ require('plugins.nvimtree').setup()
 require('plugins.devicons').setup()
 --require('plugins.indent').setup()
 
+
+require('plugins.lsp').setup()

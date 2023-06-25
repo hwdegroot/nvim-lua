@@ -1,3 +1,4 @@
+-- optimizations
 vim.cmd[[
 au Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/'
 au InsertLeave * redraw!
