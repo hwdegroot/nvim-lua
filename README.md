@@ -12,4 +12,4 @@ check out his repo's.
 
 ## TODO
 
-* [ ] Remove linenumbers in nvim-tree split
+
