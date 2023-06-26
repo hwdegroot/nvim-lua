@@ -43,11 +43,15 @@ nmap('<C-S-Space>', ufo.openAllFolds)
 nmap('<C-Space>', ufo.closeAllFolds)
 
 -- cokeline
-nmap("<C-Right>", "<Plug>(cokeline-focus-next)")
-nmap("<C-Left>", "<Plug>(cokeline-focus-prev)")
-nmap("<M-Left>", "<Plug>(cokeline-switch-prev)")
-nmap("<M-Right>", "<Plug>(cokeline-switch-next)")
+nmap('<C-Right>', '<Plug>(cokeline-focus-next)')
+nmap('<C-Left>', '<Plug>(cokeline-focus-prev)')
+nmap('<M-Left>', '<Plug>(cokeline-switch-prev)')
+nmap('<M-Right>', '<Plug>(cokeline-switch-next)')
 
+nmap('<leader>r', ':diffg RE')
+nmap('<leader>l', ':diffg LO')
+nmap('<leader>n', ']c')
+nmap('<leader>p', '[c')
 
 --nnoremap <C-l> :buffers!<CR>:buffer<Space>
 --noremap <silent> <C-d>b :diffg BA<CR>
@@ -64,5 +68,6 @@ nmap("<M-Right>", "<Plug>(cokeline-switch-next)")
 --nmap <silent> <Leader>l :wincmd l<CR>
 --map <silent> <Leader>s :so $MYVIMRC<CR>:wincmd l<CR>
 --map <silent> <Leader>$ :e $MYVIMRC<CR>
+--
 --
 

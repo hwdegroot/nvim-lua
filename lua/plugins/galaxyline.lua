@@ -440,7 +440,7 @@ table.insert(gls.right, {
                 return ''
             end
 
-            local fname = vim.fn.expand('%:p')
+            local fname = vim.fn.expand('%:t')
             return fname:gsub(vim.fn.getcwd() .. '/', '') .. ' '
         end,
         separator_highlight = { 'NONE', colors.typebg },

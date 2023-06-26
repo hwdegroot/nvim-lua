@@ -68,25 +68,28 @@ packer.startup(function(use)
     use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use { "ellisonleao/gruvbox.nvim" }
 
-    use 'tanvirtin/monokai.nvim'
+    -- Fonts and themes
+    use { 'ellisonleao/gruvbox.nvim' }
+    use { 'tanvirtin/monokai.nvim' }
+    use { 'sainnhe/sonokai' }
 
     use({
         'glepnir/galaxyline.nvim',
         branch = 'main',
         -- your statusline
         config = function()
-            require('plugins.galaxyline')
+            require('plugins.eviline')
         end,
         -- some optional icons
         requires = {
             'nvim-tree/nvim-web-devicons',
             opt = true,
-            'folke/tokyonight.nvim'
+    --        'folke/tokyonight.nvim'
         },
-
     })
+
+
 end)
 
 
