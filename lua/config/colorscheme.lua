@@ -1,5 +1,4 @@
-vim.cmd[[
-syntax enable
-colorscheme gruvbox
-]]
---vim.g.lightline = { 'colorscheme' = 'nightowl' }
+vim.cmd('syntax enable')
+vim.cmd('colorscheme gruvbox')
+--require('monokai').setup { palette = require('monokai') }
+

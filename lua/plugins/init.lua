@@ -70,6 +70,8 @@ packer.startup(function(use)
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use { "ellisonleao/gruvbox.nvim" }
 
+    use 'tanvirtin/monokai.nvim'
+
     use({
         'glepnir/galaxyline.nvim',
         branch = 'main',
