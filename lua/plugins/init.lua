@@ -32,14 +32,17 @@ packer.startup(function(use)
     use 'tpope/vim-fugitive'
     use 'lewis6991/gitsigns.nvim'
 
-    use {
-        'willothy/nvim-cokeline',
-        requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
-        config = function()
-            require('plugins.cokeline')
-        end
-    }
+    -- bufferline
+    use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+    --use {
+    --    'willothy/nvim-cokeline',
+    --    requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
+    --    config = function()
+    --        require('plugins.cokeline')
+    --    end
+    --}
 
+    -- code completion
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -54,8 +57,6 @@ packer.startup(function(use)
             'onsails/lspkind.nvim',
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
-            --'hrsh7th/cmp-vsnip',
-            --'hrsh7th/vim-vsnip',
         },
     }
 
@@ -74,6 +75,7 @@ packer.startup(function(use)
     use { 'tanvirtin/monokai.nvim' }
     use { 'sainnhe/sonokai' }
 
+    -- statusline
     use({
         'glepnir/galaxyline.nvim',
         branch = 'main',
@@ -96,7 +98,7 @@ end)
 require('plugins.sign').setup()
 require('plugins.nvimtree').setup()
 require('plugins.devicons').setup()
-
+require("plugins.bufferline").setup{}
  -- require('plugins.ufo') -> this is called in lsp.setup
 
 
