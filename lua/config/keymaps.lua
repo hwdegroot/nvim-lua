@@ -39,8 +39,8 @@ xmap('<C-Up>', ':m .-2<CR>==')
 
 -- UFO
 local ufo = require('ufo')
-nmap('zR', ufo.openAllFolds)
-nmap('zM', ufo.closeAllFolds)
+nmap('<C-S-Space>', ufo.openAllFolds)
+nmap('<C-Space>', ufo.closeAllFolds)
 
 -- cokeline
 nmap("<C-Right>", "<Plug>(cokeline-focus-next)")

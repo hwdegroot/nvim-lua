@@ -69,10 +69,6 @@ packer.startup(function(use)
 
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use { "ellisonleao/gruvbox.nvim" }
-    --use {
-    --    'nvim-lualine/lualine.nvim',
-    --    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-    --}
 
     use({
         'glepnir/galaxyline.nvim',
@@ -91,19 +87,12 @@ packer.startup(function(use)
     })
 end)
 
---require('plugins.lualine').setup()
---require('plugins.lualine').setup()
-
-require('ufo').setup({
-    provider_selector = function(bufnr, filetype, buftype)
-        return {'treesitter', 'indent'}
-    end
-})
 
 require('plugins.sign').setup()
 require('plugins.nvimtree').setup()
 require('plugins.devicons').setup()
---require('plugins.indent').setup()
+
+ -- require('plugins.ufo') -> this is called in lsp.setup
 
 
 require('plugins.lsp').setup()
