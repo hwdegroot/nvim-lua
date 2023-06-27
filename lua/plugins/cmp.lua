@@ -271,6 +271,10 @@ local function limit_lsp_types(entry, ctx)
             name = 'calc',
             priority = 3
         },
+        {
+            name = "copilot",
+            group_index = 2
+        },
     }, {
         {
             name = 'buffer',

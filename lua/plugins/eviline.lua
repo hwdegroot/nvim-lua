@@ -2,6 +2,7 @@ local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
+local icons = require('config.icons')
 gl.short_line_list = {'NvimTree','vista','dbui','packer'}
 
 gls.left[1] = {
@@ -50,8 +51,21 @@ gls.left[5] = {
     highlight = {colors.magenta,colors.bg,'bold'}
   }
 }
-
 gls.left[6] = {
+  Copilot = {
+    provider = function() return ' ' end,
+    condition = function()
+        if condition.hide_in_width and vim.g.copilot_enabled == 1 then
+            return true
+        end
+        return false
+    end,
+    icon = icons.copilot,
+    highlight = {colors.fg, colors.bg}
+  }
+}
+
+gls.left[7] = {
   LineInfo = {
     provider = 'LineColumn',
     separator = ' ',
@@ -60,7 +74,7 @@ gls.left[6] = {
   },
 }
 
-gls.left[7] = {
+gls.left[8] = {
   PerCent = {
     provider = 'LinePercent',
     separator = ' ',
@@ -69,14 +83,14 @@ gls.left[7] = {
   }
 }
 
-gls.left[8] = {
+gls.left[9] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
     highlight = {colors.red,colors.bg}
   }
 }
-gls.left[9] = {
+gls.left[10] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
@@ -84,7 +98,7 @@ gls.left[9] = {
   }
 }
 
-gls.left[10] = {
+gls.left[11] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = '  ',
@@ -92,7 +106,7 @@ gls.left[10] = {
   }
 }
 
-gls.left[11] = {
+gls.left[12] = {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
     icon = '  ',
@@ -152,8 +166,13 @@ gls.right[5] = {
     highlight = {colors.violet,colors.bg,'bold'},
   }
 }
-
 gls.right[6] = {
+  Space = {
+    provider = function() return ' ' end,
+  }
+}
+
+gls.right[7] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = condition.hide_in_width,
@@ -161,7 +180,7 @@ gls.right[6] = {
     highlight = {colors.green,colors.bg},
   }
 }
-gls.right[7] = {
+gls.right[8] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = condition.hide_in_width,
@@ -169,7 +188,7 @@ gls.right[7] = {
     highlight = {colors.orange,colors.bg},
   }
 }
-gls.right[8] = {
+gls.right[9] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = condition.hide_in_width,
@@ -178,7 +197,7 @@ gls.right[8] = {
   }
 }
 
-gls.right[9] = {
+gls.right[11] = {
   RainbowBlue = {
     provider = function() return ' ▊' end,
     highlight = {colors.blue,colors.bg}

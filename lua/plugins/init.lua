@@ -10,16 +10,20 @@ packer.startup(function(use)
         config = function ()
             require('dashboard').setup()
         end,
-        requires = {'nvim-tree/nvim-web-devicons'}
+        requires = {
+            'nvim-tree/nvim-web-devicons'
+        }
     }
 
-    use 'mbbill/undotree'
-
+    -- file search
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = {
+            'nvim-lua/plenary.nvim'
+        }
     }
 
+    -- file browser
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
@@ -27,13 +31,19 @@ packer.startup(function(use)
         },
     }
 
-    use 'haishanh/night-owl.vim'
-
+    -- git
+    use 'mbbill/undotree'
     use 'tpope/vim-fugitive'
     use 'lewis6991/gitsigns.nvim'
 
     -- bufferline
-    use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+    use {
+        'akinsho/bufferline.nvim',
+        tag = "*",
+        requires = {
+            'nvim-tree/nvim-web-devicons'
+        }
+    }
     --use {
     --    'willothy/nvim-cokeline',
     --    requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
@@ -42,12 +52,13 @@ packer.startup(function(use)
     --    end
     --}
 
-    -- code completion
+    -- code completion nvim-cmp
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
+	use 'hrsh7th/cmp-calc'
     use {
         'hrsh7th/nvim-cmp',
         config = function()
@@ -57,7 +68,25 @@ packer.startup(function(use)
             'onsails/lspkind.nvim',
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
+            'David-Kunz/cmp-npm',
         },
+    }
+    -- copilot
+    -- use { 'github/copilot.vim' }
+    use {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("plugins.copilot").setup()
+        end,
+    }
+    use {
+        "zbirenbaum/copilot-cmp",
+        after = 'copilot.lua',
+        config = function()
+            require("copilot_cmp").setup()
+        end,
     }
 
     use {
@@ -66,17 +95,26 @@ packer.startup(function(use)
         'williamboman/mason-lspconfig.nvim',
     }
 
-    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+    use {
+        'kevinhwang91/nvim-ufo',
+        requires = {
+            'kevinhwang91/promise-async'
+        }
+    }
 
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
 
-    -- Fonts and themes
+    -- Fonts, themes and colorscehemes
     use { 'ellisonleao/gruvbox.nvim' }
     use { 'tanvirtin/monokai.nvim' }
     use { 'sainnhe/sonokai' }
+   --  use 'haishanh/night-owl.vim'
 
     -- statusline
-    use({
+    use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
         -- your statusline
@@ -87,19 +125,17 @@ packer.startup(function(use)
         requires = {
             'nvim-tree/nvim-web-devicons',
             opt = true,
-    --        'folke/tokyonight.nvim'
         },
-    })
-
-
+    }
 end)
 
 
 require('plugins.sign').setup()
 require('plugins.nvimtree').setup()
 require('plugins.devicons').setup()
-require("plugins.bufferline").setup{}
- -- require('plugins.ufo') -> this is called in lsp.setup
+require("plugins.bufferline").setup()
+require("plugins.cmp-npm").setup()
+-- require('plugins.ufo') -> Not needed here, this is called in lsp.setup
 
 
 require('plugins.lsp').setup()
