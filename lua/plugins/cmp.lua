@@ -128,15 +128,20 @@ local function limit_lsp_types(entry, ctx)
             end,
         },
         mapping = cmp.mapping.preset.insert({
-            ['<C-k>'] = cmp.mapping.select_prev_item(),
-            ['<C-j>'] = cmp.mapping.select_next_item(),
+            ['<Up>'] = cmp.mapping.select_prev_item(),
+            ['<DOwn>'] = cmp.mapping.select_next_item(),
             ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-2), { 'i', 'c' }),
-            ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
+            ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
             ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
             ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
             ['<C-e>'] = cmp.mapping({
                 i = cmp.mapping.abort(),
                 c = cmp.mapping.close(),
+            }),
+            ['<S-CR>'] = cmp.mapping.confirm({
+                -- this is the important line for Copilot
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = true,
             }),
             ['<CR>'] = cmp.mapping.confirm({
                 -- this is the important line for Copilot
@@ -158,7 +163,7 @@ local function limit_lsp_types(entry, ctx)
                     fallback()
                 end
             end, {
-               'i',
+                'i',
                 's',
             }),
             ['<S-Tab>'] = cmp.mapping(function(fallback)
@@ -243,42 +248,42 @@ local function limit_lsp_types(entry, ctx)
         },
         {
             name = 'npm',
-            priority = 9
+            group_index = 2
         },
         {
             name = 'codeium',
-            priority = 9
+            group_index = 2
         },
         {
             name = 'cmp_tabnine',
-            priority = 7,
+            group_index = 2,
             max_num_results = 3
         },
         {
             name = 'luasnip',
-            priority = 7,
-            max_item_count = 5
+            group_index = 2,
+            max_item_count = 5,
         },
         {
             name = 'nvim_lua',
-            priority = 5
+            group_index = 2,
         },
         {
             name = 'path',
-            priority = 4
+            group_index = 2
         },
         {
             name = 'calc',
-            priority = 3
+            group_index = 2,
         },
         {
             name = "copilot",
-            group_index = 2
+            group_index = 2,
         },
     }, {
         {
             name = 'buffer',
-            priority = 7,
+            priority = 1,
             keyword_length = 5,
             option = buffer_option,
             max_item_count = 5

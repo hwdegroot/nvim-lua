@@ -74,18 +74,18 @@ packer.startup(function(use)
     -- copilot and AI tools
     -- use { 'github/copilot.vim' }
     use {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
+        'zbirenbaum/copilot.lua',
+        cmd = 'Copilot',
+        event = 'InsertEnter',
         config = function()
-            require("plugins.copilot").setup()
+            require('copilot').setup()
         end,
     }
     use {
-        "zbirenbaum/copilot-cmp",
+        'zbirenbaum/copilot-cmp',
         after = 'copilot.lua',
         config = function()
-            require("copilot_cmp").setup()
+            require('copilot_cmp').setup()
         end,
     }
     use {
@@ -140,9 +140,6 @@ end)
 require('plugins.sign').setup()
 require('plugins.nvimtree').setup()
 require('plugins.devicons').setup()
-require("plugins.bufferline").setup()
-require("plugins.cmp-npm").setup()
--- require('plugins.ufo') -> Not needed here, this is called in lsp.setup
-
-
-require('plugins.lsp').setup()
+require('plugins.bufferline').setup()
+require('plugins.cmp-npm').setup()
+require('plugins.ufo').setup()

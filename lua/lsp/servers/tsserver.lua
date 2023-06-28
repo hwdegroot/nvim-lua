@@ -1,4 +1,5 @@
 local M = {}
+return M
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -103,34 +104,34 @@ local handlers = {
 }
 
 local settings = {
-    typescript = {
-        inlayHints = {
-            includeInlayParameterNameHints = "all",
-            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = false,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = false,
-            includeInlayEnumMemberValueHints = true,
-        },
-        suggest = {
-            includeCompletionsForModuleExports = true,
-        },
-    },
-    javascript = {
-        inlayHints = {
-            includeInlayParameterNameHints = "all",
-            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = false,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = false,
-            includeInlayEnumMemberValueHints = true,
-        },
-        suggest = {
-            includeCompletionsForModuleExports = true,
-        },
-    },
+--    typescript = {
+--        inlayHints = {
+--            includeInlayParameterNameHints = "all",
+--            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+--            includeInlayFunctionParameterTypeHints = true,
+--            includeInlayVariableTypeHints = false,
+--            includeInlayPropertyDeclarationTypeHints = true,
+--            includeInlayFunctionLikeReturnTypeHints = false,
+--            includeInlayEnumMemberValueHints = true,
+--        },
+--        suggest = {
+--            includeCompletionsForModuleExports = true,
+--        },
+--    },
+--    javascript = {
+--        inlayHints = {
+--            includeInlayParameterNameHints = "all",
+--            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+--            includeInlayFunctionParameterTypeHints = true,
+--            includeInlayVariableTypeHints = false,
+--            includeInlayPropertyDeclarationTypeHints = true,
+--            includeInlayFunctionLikeReturnTypeHints = false,
+--            includeInlayEnumMemberValueHints = true,
+--        },
+--        suggest = {
+--            includeCompletionsForModuleExports = true,
+--        },
+--    },
 }
 
 M.capabilities = capabilities

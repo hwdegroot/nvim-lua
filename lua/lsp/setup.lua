@@ -1,7 +1,7 @@
 -- Setup installer & lsp configs
-local typescript_ok, typescript = pcall(require, "typescript")
 local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
+local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 
 if not mason_ok or not mason_lsp_ok then
     return
@@ -10,31 +10,28 @@ end
 mason.setup({
     ui = {
         -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-        border = 'rounded' or "rounded",
+        border = 'rounded'
     },
+    log_level = vim.log.levels.INFO,
+    max_concurrent_installers = 4,
 })
 
+-- Order matters
+local servers = {
+    "tsserver",
+    "tailwindcss",
+    "cssls",
+    "eslint",
+    "jsonls",
+    "lua_ls",
+    "bashls",
+    "html",
+    "graphql",
+    "prismals",
+}
 mason_lsp.setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = {
-        "bashls",
-        "cssls",
-        "eslint",
-        "graphql",
-        "html",
-        "jsonls",
-        "lua_ls",
-        "prismals",
-        "tailwindcss",
-        "tsserver",
-    },
-    -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
-    -- This setting has no relation with the `ensure_installed` setting.
-    -- Can either be:
-    --   - false: Servers are not automatically installed.
-    --   - true: All servers set up via lspconfig are automatically installed.
-    --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
-    --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
+    ensure_installed = servers,
     automatic_installation = true,
 })
 
@@ -47,95 +44,49 @@ local handlers = {
     }),
     ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' }),
     ["textDocument/publishDiagnostics"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics,
-        {
+        vim.lsp.diagnostic.on_publish_diagnostics, {
             virtual_text = false,
             signs = true,
             update_in_insert = false,
             underline = true,
         }
-        -- { virtual_text = true }
     ),
 }
 
-local function on_attach(client, bufnr)
-    -- set up buffer keymaps, etc.
-end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-}
- require('plugins.ufo').setup()
+local opts = {}
 
--- Order matters
-
--- It enables tsserver automatically so no need to call lspconfig.tsserver.setup
-if typescript_ok then
-    typescript.setup({
-        disable_commands = false, -- prevent the plugin from creating Vim commands
-        debug = false,          -- enable debug logging for commands
-        -- LSP Config options
-        server = {
-            capabilities = require("lsp.servers.tsserver").capabilities,
-            handlers = require("lsp.servers.tsserver").handlers,
-            on_attach = require("lsp.servers.tsserver").on_attach,
-            settings = require("lsp.servers.tsserver").settings,
-        },
-    })
-end
-
-lspconfig.tailwindcss.setup({
-    capabilities = require("lsp.servers.tailwindcss").capabilities,
-    filetypes = require("lsp.servers.tailwindcss").filetypes,
-    handlers = handlers,
-    init_options = require("lsp.servers.tailwindcss").init_options,
-    on_attach = require("lsp.servers.tailwindcss").on_attach,
-    settings = require("lsp.servers.tailwindcss").settings,
-})
-
-lspconfig.cssls.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-    on_attach = require("lsp.servers.cssls").on_attach,
-    settings = require("lsp.servers.cssls").settings,
-})
-
-lspconfig.eslint.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-    on_attach = require("lsp.servers.eslint").on_attach,
-    settings = require("lsp.servers.eslint").settings,
-})
-
-lspconfig.jsonls.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-    on_attach = on_attach,
-    settings = require("lsp.servers.jsonls").settings,
-})
-
-lspconfig.lua_ls.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-    on_attach = on_attach,
-    settings = require("lsp.servers.lua_ls").settings,
-})
-
-lspconfig.vuels.setup({
-    filetypes = require("lsp.servers.vuels").filetypes,
-    handlers = handlers,
-    init_options = require("lsp.servers.vuels").init_options,
-    on_attach = require("lsp.servers.vuels").on_attach,
-    settings = require("lsp.servers.vuels").settings,
-})
-
-for _, server in ipairs({ "bashls", "emmet_ls", "graphql", "html", "prismals" }) do
-    lspconfig[server].setup({
-        on_attach = on_attach,
+-- loop through the servers
+for _, server in pairs(servers) do
+    opts = {
+        -- getting "on_attach" and capabilities from handlers
+        on_attach = require('lsp.handlers').on_attach,
         capabilities = capabilities,
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { 'vim' }
+                }
+            }
+        },
         handlers = handlers,
-    })
+    }
+
+    -- get the server name
+    server = vim.split(server, "@")[1]
+
+    -- pass them to lspconfig
+    lspconfig[server].setup(opts)
 end
+
+
+--capabilities.textDocument.foldingRange = {
+--    dynamicRegistration = false,
+--    lineFoldingOnly = true,
+--}
+--require('plugins.ufo').setup()
+
