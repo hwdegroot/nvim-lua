@@ -71,7 +71,7 @@ packer.startup(function(use)
             'David-Kunz/cmp-npm',
         },
     }
-    -- copilot
+    -- copilot and AI tools
     -- use { 'github/copilot.vim' }
     use {
         "zbirenbaum/copilot.lua",
@@ -88,13 +88,20 @@ packer.startup(function(use)
             require("copilot_cmp").setup()
         end,
     }
+    use {
+        'tzachar/cmp-tabnine',
+        run = './install.sh',
+        requires = 'hrsh7th/nvim-cmp'
+    }
 
+    -- Automatic language servers for code completion
     use {
         'williamboman/mason.nvim',
         run = ':MasonUpdate', -- :MasonUpdate updates registry contents
         'williamboman/mason-lspconfig.nvim',
     }
 
+    -- smart folding
     use {
         'kevinhwang91/nvim-ufo',
         requires = {

@@ -26,10 +26,5 @@ vim.opt.smartindent = true
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
-vim.opt.updatetime = 300
+vim.opt.updatetime = 250
 vim.opt.wildmenu = true
-
-
-
---vim.opt.clipboard += 'unnamedplus'
---vim.opt.shortmess += c

@@ -6,6 +6,6 @@ au ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red'
 au BufWritePre * :%s/\s\+$//e
 ]]
 
--- cokeline
-vim.cmd "au VimEnter * hi! tablinefill guifg=NONE guibg=NONE"
+-- lsp diagnostics
+vim.cmd('autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, border="rounded"})')
 
