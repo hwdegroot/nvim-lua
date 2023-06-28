@@ -12,32 +12,32 @@ M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 -- Here we declare the setup function and add the modifications in signs and extra configs, like virtual text, false update_in_insert, rounded borders for float windows, etc.
-M.setup = function()
-    local signs = {
-        -- change the "?" to an icon that you like
-        { name = "DiagnosticSignError", text = "?" },
-        { name = "DiagnosticSignWarn",  text = "?" },
-        { name = "DiagnosticSignHint",  text = "?" },
-        { name = "DiagnosticSignInfo",  text = "?" },
-    }
-
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
-
-    local config = {
-        virtual_text = true,
-        -- show signs
-        signs = {
-            active = signs,
-        },
-        update_in_insert = false,
-        underline = true,
-        severity_sort = true,
-    }
-
-    vim.diagnostic.config(config)
-end
+--M.setup = function()
+--    local signs = {
+--        -- change the "?" to an icon that you like
+--        { name = "DiagnosticSignError", text = "?" },
+--        { name = "DiagnosticSignWarn",  text = "?" },
+--        { name = "DiagnosticSignHint",  text = "?" },
+--        { name = "DiagnosticSignInfo",  text = "?" },
+--    }
+--
+--    for _, sign in ipairs(signs) do
+--        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+--    end
+--
+--    local config = {
+--        virtual_text = true,
+--        -- show signs
+--        signs = {
+--            active = signs,
+--        },
+--        update_in_insert = false,
+--        underline = true,
+--        severity_sort = true,
+--    }
+--
+--    vim.diagnostic.config(config)
+--end
 
 -- apply f to all elements in table
 local function foreach(tbl, f)

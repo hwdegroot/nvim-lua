@@ -1,7 +1,7 @@
 -- Setup installer & lsp configs
 local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
-local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+local _, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 
 if not mason_ok or not mason_lsp_ok then
     return
@@ -67,8 +67,8 @@ for _, server in pairs(servers) do
         on_attach = require('lsp.handlers').on_attach,
         capabilities = capabilities,
         settings = {
-            Lua = {
-                diagnostics = {
+            diagnostics = {
+                Lua = {
                     globals = { 'vim' }
                 }
             }
@@ -89,4 +89,3 @@ end
 --    lineFoldingOnly = true,
 --}
 --require('plugins.ufo').setup()
-

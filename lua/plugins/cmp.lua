@@ -44,166 +44,166 @@ local function limit_lsp_types(entry, ctx)
             kind == types.lsp.CompletionItemKind.Method
             or kind == types.lsp.CompletionItemKind.Field
             or kind == types.lsp.CompletionItemKind.Property
-            then
-                return true
-            else
-                return false
-            end
-        elseif string.match(line, '^%s+%w+$') then
-            if kind == types.lsp.CompletionItemKind.Function or kind == types.lsp.CompletionItemKind.Variable then
-                return true
-            else
-                return false
-            end
-        end
-
-        return true
-    end
-
-    local has_words_before = function()
-        if vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt' then
+        then
+            return true
+        else
             return false
         end
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match('^%s*$') == nil
-    end
-
-    --- Get completion context, i.e., auto-import/target module location.
-    --- Depending on the LSP this information is stored in different parts of the
-    --- lsp.CompletionItem payload. The process to find them is very manual: log the payloads
-    --- And see where useful information is stored.
-    ---@param completion lsp.CompletionItem
-    ---@param source cmp.Source
-    ---@see Astronvim, because i just discovered they're already doing this thing, too
-    --  https://github.com/AstroNvim/AstroNvim
-    local function get_lsp_completion_context(completion, source)
-        local ok, source_name = pcall(function()
-            return source.source.client.config.name
-        end)
-        if not ok then
-            return nil
-        end
-        if source_name == 'tsserver' then
-            return completion.detail
-        elseif source_name == 'pyright' then
-            if completion.labelDetails ~= nil then
-                return completion.labelDetails.description
-            end
+    elseif string.match(line, '^%s+%w+$') then
+        if kind == types.lsp.CompletionItemKind.Function or kind == types.lsp.CompletionItemKind.Variable then
+            return true
+        else
+            return false
         end
     end
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ Setup                                                    │
-    -- ╰──────────────────────────────────────────────────────────╯
-    local source_mapping = {
-        npm = icons.terminal .. 'NPM',
-        cmp_tabnine = icons.light,
-        Copilot = icons.copilot,
-        Codeium = icons.codeium,
-        nvim_lsp = icons.paragraph .. 'LSP',
-        buffer = icons.buffer .. 'BUF',
-        nvim_lua = icons.bomb,
-        luasnip = icons.snippet .. 'SNP',
-        calc = icons.calculator,
-        path = icons.folderOpen2,
-        treesitter = icons.tree,
-        zsh = icons.terminal .. 'ZSH',
-    }
+    return true
+end
 
-    local buffer_option = {
-        -- Complete from all visible buffers (splits)
-        get_bufnrs = function()
-            local bufs = {}
-            for _, win in ipairs(vim.api.nvim_list_wins()) do
-                bufs[vim.api.nvim_win_get_buf(win)] = true
-            end
-            return vim.tbl_keys(bufs)
+local has_words_before = function()
+    if vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt' then
+        return false
+    end
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match('^%s*$') == nil
+end
+
+--- Get completion context, i.e., auto-import/target module location.
+--- Depending on the LSP this information is stored in different parts of the
+--- lsp.CompletionItem payload. The process to find them is very manual: log the payloads
+--- And see where useful information is stored.
+---@param completion lsp.CompletionItem
+---@param source cmp.Source
+---@see Astronvim, because i just discovered they're already doing this thing, too
+--  https://github.com/AstroNvim/AstroNvim
+local function get_lsp_completion_context(completion, source)
+    local ok, source_name = pcall(function()
+        return source.source.client.config.name
+    end)
+    if not ok then
+        return nil
+    end
+    if source_name == 'tsserver' then
+        return completion.detail
+    elseif source_name == 'pyright' then
+        if completion.labelDetails ~= nil then
+            return completion.labelDetails.description
+        end
+    end
+end
+
+-- ╭──────────────────────────────────────────────────────────╮
+-- │ Setup                                                    │
+-- ╰──────────────────────────────────────────────────────────╯
+local source_mapping = {
+    npm = icons.terminal .. 'NPM',
+    cmp_tabnine = icons.light,
+    Copilot = icons.copilot,
+    Codeium = icons.codeium,
+    nvim_lsp = icons.paragraph .. 'LSP',
+    buffer = icons.buffer .. 'BUF',
+    nvim_lua = icons.bomb,
+    luasnip = icons.snippet .. 'SNP',
+    calc = icons.calculator,
+    path = icons.folderOpen2,
+    treesitter = icons.tree,
+    zsh = icons.terminal .. 'ZSH',
+}
+
+local buffer_option = {
+    -- Complete from all visible buffers (splits)
+    get_bufnrs = function()
+        local bufs = {}
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+        end
+        return vim.tbl_keys(bufs)
+    end,
+}
+
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
         end,
-    }
-
-    cmp.setup({
-        snippet = {
-            expand = function(args)
-                luasnip.lsp_expand(args.body)
-            end,
-        },
-        mapping = cmp.mapping.preset.insert({
-            ['<Up>'] = cmp.mapping.select_prev_item(),
-            ['<DOwn>'] = cmp.mapping.select_next_item(),
-            ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-2), { 'i', 'c' }),
-            ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
-            ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-            ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-            ['<C-e>'] = cmp.mapping({
-                i = cmp.mapping.abort(),
-                c = cmp.mapping.close(),
-            }),
-            ['<S-CR>'] = cmp.mapping.confirm({
-                -- this is the important line for Copilot
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = true,
-            }),
-            ['<CR>'] = cmp.mapping.confirm({
-                -- this is the important line for Copilot
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = false,
-            }),
-            ['<Tab>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif cmp.visible() and has_words_before() then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                elseif luasnip.expandable() then
-                    luasnip.expand()
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                elseif check_backspace() then
-                    fallback()
-                else
-                    fallback()
-                end
-            end, {
-                'i',
-                's',
-            }),
-            ['<S-Tab>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                else
-                    fallback()
-                end
-            end, {
-                'i',
-                's',
-            }),
-            ['<C-l>'] = cmp.mapping(function(fallback)
-                if luasnip.expandable() then
-                    luasnip.expand()
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                else
-                    fallback()
-                end
-            end, {
-                'i',
-                's',
-            }),
-            ['<C-h>'] = cmp.mapping(function(fallback)
-                if luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                else
-                    fallback()
-                end
-            end, {
-                'i',
-                's',
-            }),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-k>'] = cmp.mapping.select_prev_item(),
+        ['<C-j>'] = cmp.mapping.select_next_item(),
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-2), { 'i', 'c' }),
+        ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
+        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+        ['<C-y>'] = cmp.config.disable,     -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        ['<C-e>'] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
         }),
+        ['<S-CR>'] = cmp.mapping.confirm({
+            -- this is the important line for Copilot
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        }),
+        ['<CR>'] = cmp.mapping.confirm({
+            -- this is the important line for Copilot
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+        }),
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif cmp.visible() and has_words_before() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            elseif luasnip.expandable() then
+                luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif check_backspace() then
+                fallback()
+            else
+                fallback()
+            end
+        end, {
+            'i',
+            's',
+        }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, {
+            'i',
+            's',
+        }),
+        ['<C-l>'] = cmp.mapping(function(fallback)
+            if luasnip.expandable() then
+                luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, {
+            'i',
+            's',
+        }),
+        ['<C-h>'] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, {
+            'i',
+            's',
+        }),
+    }),
     formatting = {
         format = function(entry, vim_item)
-        -- Set the highlight group for the Codeium source
+            -- Set the highlight group for the Codeium source
             if entry.source.name == 'codeium' then
                 vim_item.kind_hl_group = 'CmpItemKindCopilot'
             end
@@ -347,4 +347,3 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     })
 })
-
