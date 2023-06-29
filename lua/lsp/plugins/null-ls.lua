@@ -18,9 +18,6 @@ null_ls.setup({
     -- the sources are prettier, eslint_d and rubocop
     sources = {
         formatting.prettier,
---        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.completion.spell,
 
         -- setting eslint_d only if we have a ".eslintrc.js" file in the project
         diagnostics.eslint_d.with({

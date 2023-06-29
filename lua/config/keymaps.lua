@@ -47,6 +47,12 @@ nmap("<leader>l", ":diffg LO<CR>", { silent = false })
 nmap("<leader>n", "]c", { silent = false })
 nmap("<leader>p", "[c", { silent = false })
 
+-- Folding
+nmap("<C-S-Space>", vim.cmd.foldclose)
+nmap("<C-Space>", vim.cmd.foldopen)
+
+
+
 --nnoremap <C-l> :buffers!<CR>:buffer<Space>
 --noremap <silent> <C-d>b :diffg BA<CR>
 --noremap <silent> <C-d>r :diffg RE<CR>

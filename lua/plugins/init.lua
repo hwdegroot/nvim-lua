@@ -45,13 +45,6 @@ packer.startup(function(use)
             'nvim-tree/nvim-web-devicons',
         },
     })
-    --use {
-    --    'willothy/nvim-cokeline',
-    --    requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
-    --    config = function()
-    --        require('plugins.cokeline')
-    --    end
-    --}
 
     -- code completion nvim-cmp
     use('neovim/nvim-lspconfig')
@@ -143,12 +136,6 @@ packer.startup(function(use)
             require('null-ls').setup()
         end,
         requires = { 'nvim-lua/plenary.nvim' },
-    })
-    use({
-        'jghauser/fold-cycle.nvim',
-        config = function()
-            require('fold-cycle').setup()
-        end,
     })
 end)
 
