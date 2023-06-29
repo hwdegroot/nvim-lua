@@ -1,4 +1,4 @@
-local M = {}
+local M, vim = {}, vim
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -10,34 +10,6 @@ end
 
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
-
--- Here we declare the setup function and add the modifications in signs and extra configs, like virtual text, false update_in_insert, rounded borders for float windows, etc.
---M.setup = function()
---    local signs = {
---        -- change the "?" to an icon that you like
---        { name = "DiagnosticSignError", text = "?" },
---        { name = "DiagnosticSignWarn",  text = "?" },
---        { name = "DiagnosticSignHint",  text = "?" },
---        { name = "DiagnosticSignInfo",  text = "?" },
---    }
---
---    for _, sign in ipairs(signs) do
---        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
---    end
---
---    local config = {
---        virtual_text = true,
---        -- show signs
---        signs = {
---            active = signs,
---        },
---        update_in_insert = false,
---        underline = true,
---        severity_sort = true,
---    }
---
---    vim.diagnostic.config(config)
---end
 
 -- apply f to all elements in table
 local function foreach(tbl, f)
@@ -122,48 +94,6 @@ local function qf_rename()
 end
 
 vim.lsp.buf.rename = qf_rename
--- Here we set up keymaps. You can change them if you already have specifics for these functions, or just want to try another keymap.
---local function lsp_keymaps(bufnr, client)
---    local opts = { noremap = true, silent = true }
---
---    -- Enable completion triggered by <c-x><c-o>
---    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
---
---    -- Mappings.
---    -- See `:help vim.lsp.*` for documentation on any of the below functions
---    local bufopts = { noremap = true, silent = true, buffer = bufnr }
---    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
---    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
---    vim.keymap.set('n', 'gds', ":vsplit | lua vim.lsp.buf.definition()<cr>", bufopts)
---    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
---    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
---    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
---    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
---    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
---    vim.keymap.set('n', '<leader>wl', function()
---        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
---    end, bufopts)
---    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
---    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
---    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
---    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
---    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
---
---    local function quickfix()
---        vim.lsp.buf.code_action({ apply = true, context = { only = { 'quickfix' } } })
---    end
---
---    vim.keymap.set('n', '<leader>qf', quickfix, opts)
---
---    if client.name == 'rust_analyzer' then
---        print("Attaching to " .. client.name)
---        local rt = require("rust-tools")
---        -- Hover actions
---        vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
---        -- Code action groups
---        vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
---    end
---end
 
 -- Here we let the LSP prioritize null-ls formatters. Why? Normally when we install a separate formatter or linter in null-ls we want to use just them.
 -- if you don't prioritize any, neovim will ask you every time you format which one you want to use.

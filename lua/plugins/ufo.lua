@@ -38,22 +38,22 @@ function M.setup()
         end,
         close_fold_kinds = { "imports" },
     })
-    nmap('zR', ufo.openAllFolds)
-    nmap('zM', ufo.closeAllFolds)
-    nmap('zr', ufo.openFoldsExceptKinds)
-    nmap('zm', ufo.closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+    --nmap('zR', ufo.openAllFolds)
+    --nmap('zM', ufo.closeAllFolds)
+    --nmap('zr', ufo.openFoldsExceptKinds)
+    --nmap('zm', ufo.closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
     --nmap('<C-S-Space>', ufo.openAllFolds)
     --nmap('<C-Space>', ufo.closeAllFolds)
-    nmap("<C-S-Space>", vim.cmd.foldclose)
-    nmap("<C-Space>", vim.cmd.foldopen)
-    nmap('zr', ufo.openFoldsExceptKinds)
-    nmap('zm', ufo.closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
-    --nmap('K', function()
-    --    local winid = ufo.peekFoldedLinesUnderCursor()
-    --    if not winid then
-    --        vim.lsp.buf.hover()
-    --    end
-    --end)
+    nmap("<C-S-Space>", ufo.openAllFolds)
+    nmap("<C-Space>", ufo.closeAllFolds)
+    nmap('<S-Space>', ufo.openFoldsExceptKinds)
+    nmap('<Space>', ufo.closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+    nmap('K', function()
+        local winid = ufo.peekFoldedLinesUnderCursor()
+        if not winid then
+            vim.lsp.buf.hover()
+        end
+    end)
 end
 
 return M
