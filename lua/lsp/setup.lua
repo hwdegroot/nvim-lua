@@ -1,7 +1,8 @@
 -- Setup installer & lsp configs
-local mason_ok, mason = pcall(require, "mason")
-local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
+local mason_ok, mason = pcall(require, 'mason')
+local mason_lsp_ok, mason_lsp = pcall(require, 'mason-lspconfig')
 local _, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+local vim = vim
 
 if not mason_ok or not mason_lsp_ok then
     return
@@ -18,16 +19,17 @@ mason.setup({
 
 -- Order matters
 local servers = {
-    "tsserver",
-    "tailwindcss",
-    "cssls",
-    "eslint",
-    "jsonls",
-    "lua_ls",
-    "bashls",
-    "html",
-    "graphql",
-    "prismals",
+    'tsserver',
+    'tailwindcss',
+    'cssls',
+    'eslint',
+    'jsonls',
+    'lua_ls',
+    'bashls',
+    'html',
+    'graphql',
+    'prismals',
+    'terraformls',
 }
 mason_lsp.setup({
     -- A list of servers to automatically install if they're not already installed
@@ -35,15 +37,15 @@ mason_lsp.setup({
     automatic_installation = true,
 })
 
-local lspconfig = require("lspconfig")
+local lspconfig = require('lspconfig')
 
 local handlers = {
-    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
         silent = true,
         border = 'rounded',
     }),
-    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' }),
-    ["textDocument/publishDiagnostics"] = vim.lsp.with(
+    ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' }),
+    ['textDocument/publishDiagnostics'] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics, {
             virtual_text = false,
             signs = true,
@@ -63,7 +65,7 @@ local opts = {}
 -- loop through the servers
 for _, server in pairs(servers) do
     opts = {
-        -- getting "on_attach" and capabilities from handlers
+        -- getting 'on_attach' and capabilities from handlers
         on_attach = require('lsp.handlers').on_attach,
         capabilities = capabilities,
         settings = {
@@ -77,7 +79,7 @@ for _, server in pairs(servers) do
     }
 
     -- get the server name
-    server = vim.split(server, "@")[1]
+    server = vim.split(server, '@')[1]
 
     -- pass them to lspconfig
     lspconfig[server].setup(opts)

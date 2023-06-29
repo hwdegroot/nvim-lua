@@ -65,6 +65,9 @@ packer.startup(function(use)
             'David-Kunz/cmp-npm',
         },
     })
+    -- terraform
+    use('hashicorp/terraform-ls')
+
     -- copilot and AI tools
     -- use { 'github/copilot.vim' }
     use({
