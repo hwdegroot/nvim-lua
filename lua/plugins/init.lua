@@ -1,49 +1,50 @@
 local packer = require('packer')
 
-vim.cmd [[packadd packer.nvim]]
+vim.cmd([[packadd packer.nvim]])
 packer.startup(function(use)
-    use 'wbthomason/packer.nvim'
+    use('wbthomason/packer.nvim')
 
-    use {
+    use({
         'glepnir/dashboard-nvim',
         event = 'VimEnter',
-        config = function ()
+        config = function()
             require('dashboard').setup()
         end,
         requires = {
-            'nvim-tree/nvim-web-devicons'
-        }
-    }
+            'nvim-tree/nvim-web-devicons',
+        },
+    })
 
     -- file search
-    use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    use({
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.1',
         requires = {
-            'nvim-lua/plenary.nvim'
-        }
-    }
+            'nvim-lua/plenary.nvim',
+        },
+    })
 
     -- file browser
-    use {
+    use({
         'nvim-tree/nvim-tree.lua',
         requires = {
             'nvim-tree/nvim-web-devicons', -- optional
         },
-    }
+    })
 
     -- git
-    use 'mbbill/undotree'
-    use 'tpope/vim-fugitive'
-    use 'lewis6991/gitsigns.nvim'
+    use('mbbill/undotree')
+    use('tpope/vim-fugitive')
+    use('lewis6991/gitsigns.nvim')
 
     -- bufferline
-    use {
+    use({
         'akinsho/bufferline.nvim',
-        tag = "*",
+        tag = '*',
         requires = {
-            'nvim-tree/nvim-web-devicons'
-        }
-    }
+            'nvim-tree/nvim-web-devicons',
+        },
+    })
     --use {
     --    'willothy/nvim-cokeline',
     --    requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
@@ -53,13 +54,13 @@ packer.startup(function(use)
     --}
 
     -- code completion nvim-cmp
-    use 'neovim/nvim-lspconfig'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-	use 'hrsh7th/cmp-calc'
-    use {
+    use('neovim/nvim-lspconfig')
+    use('hrsh7th/cmp-nvim-lsp')
+    use('hrsh7th/cmp-buffer')
+    use('hrsh7th/cmp-path')
+    use('hrsh7th/cmp-cmdline')
+    use('hrsh7th/cmp-calc')
+    use({
         'hrsh7th/nvim-cmp',
         config = function()
             require('plugins.cmp')
@@ -70,58 +71,58 @@ packer.startup(function(use)
             'saadparwaiz1/cmp_luasnip',
             'David-Kunz/cmp-npm',
         },
-    }
+    })
     -- copilot and AI tools
     -- use { 'github/copilot.vim' }
-    use {
+    use({
         'zbirenbaum/copilot.lua',
         cmd = 'Copilot',
         event = 'InsertEnter',
         config = function()
             require('copilot').setup()
         end,
-    }
-    use {
+    })
+    use({
         'zbirenbaum/copilot-cmp',
         after = 'copilot.lua',
         config = function()
             require('copilot_cmp').setup()
         end,
-    }
-    use {
+    })
+    use({
         'tzachar/cmp-tabnine',
         run = './install.sh',
-        requires = 'hrsh7th/nvim-cmp'
-    }
+        requires = 'hrsh7th/nvim-cmp',
+    })
 
     -- Automatic language servers for code completion
-    use {
+    use({
         'williamboman/mason.nvim',
         run = ':MasonUpdate', -- :MasonUpdate updates registry contents
         'williamboman/mason-lspconfig.nvim',
-    }
+    })
 
     -- smart folding
-    use {
+    use({
         'kevinhwang91/nvim-ufo',
         requires = {
-            'kevinhwang91/promise-async'
-        }
-    }
+            'kevinhwang91/promise-async',
+        },
+    })
 
-    use {
+    use({
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
-    }
+        run = ':TSUpdate',
+    })
 
     -- Fonts, themes and colorscehemes
-    use { 'ellisonleao/gruvbox.nvim' }
-    use { 'tanvirtin/monokai.nvim' }
-    use { 'sainnhe/sonokai' }
-   --  use 'haishanh/night-owl.vim'
+    use({ 'ellisonleao/gruvbox.nvim' })
+    use({ 'tanvirtin/monokai.nvim' })
+    use({ 'sainnhe/sonokai' })
+    --  use 'haishanh/night-owl.vim'
 
     -- statusline
-    use {
+    use({
         'glepnir/galaxyline.nvim',
         branch = 'main',
         -- your statusline
@@ -133,9 +134,23 @@ packer.startup(function(use)
             'nvim-tree/nvim-web-devicons',
             opt = true,
         },
-    }
-end)
+    })
 
+    -- null-ls
+    use({
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function()
+            require('null-ls').setup()
+        end,
+        requires = { 'nvim-lua/plenary.nvim' },
+    })
+    use({
+        'jghauser/fold-cycle.nvim',
+        config = function()
+            require('fold-cycle').setup()
+        end,
+    })
+end)
 
 require('plugins.sign').setup()
 require('plugins.nvimtree').setup()

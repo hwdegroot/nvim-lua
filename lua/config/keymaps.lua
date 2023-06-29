@@ -1,57 +1,51 @@
-local utils = require('config.utils')
+local vim = vim
+local utils = require("config.utils")
 local xmap, nmap = utils.xmap, utils.nmap
 
-
 -- telescope search
-local telescope = require('telescope.builtin')
-xmap('<C-p>', telescope.find_files)
-xmap('<C-t>g', telescope.live_grep)
-xmap('<C-t>b', telescope.buffers)
-xmap('<C-t>h', telescope.help_tags)
+local telescope = require("telescope.builtin")
+xmap("<C-p>", telescope.find_files)
+xmap("<C-t>g", telescope.live_grep)
+xmap("<C-t>b", telescope.buffers)
+xmap("<C-t>h", telescope.help_tags)
 
 -- nvim-tree
-xmap('<C-n>', vim.cmd.NvimTreeToggle)
+xmap("<C-n>", vim.cmd.NvimTreeToggle)
 
 -- Undo tree
-xmap('<C-u>', vim.cmd.UndotreeToggle)
+xmap("<C-u>", vim.cmd.UndotreeToggle)
 
 -- Navigating through splits and tabs
-xmap('<C-Left>', vim.cmd.bprevious)
-xmap('<C-Right>', vim.cmd.bnext)
-xmap('<C-S-Up>', '<C-w>k')
-xmap('<C-S-Down>', '<C-w>j')
-xmap('<C-S-Left>', '<C-w>h')
-xmap('<C-S-Right>', '<C-w>l')
+xmap("<C-Left>", vim.cmd.bprevious)
+xmap("<C-Right>", vim.cmd.bnext)
+xmap("<C-S-Up>", "<C-w>k")
+xmap("<C-S-Down>", "<C-w>j")
+xmap("<C-S-Left>", "<C-w>h")
+xmap("<C-S-Right>", "<C-w>l")
 
 -- Fix random character navigation
-xmap('<Esc>[1;5A', '<C-Up>')
-xmap('<Esc>[1;5B', '<C-Down>')
+xmap("<Esc>[1;5A", "<C-Up>")
+xmap("<Esc>[1;5B", "<C-Down>")
 --xmap('<Esc>[1;5C', '<C-Right>')
 --xmap('<Esc>[1;5D', '<C-Left>')
-xmap('<Esc>[1;2A', '<S-Up>')
-xmap('<Esc>[1;2B', '<S-Down>')
-xmap('<Esc>[0;2C', '<S-Right>')
-xmap('<Esc>[1;2D', '<S-Left>')
+xmap("<Esc>[1;2A", "<S-Up>")
+xmap("<Esc>[1;2B", "<S-Down>")
+xmap("<Esc>[0;2C", "<S-Right>")
+xmap("<Esc>[1;2D", "<S-Left>")
 
 -- Move lines up and down
-xmap('<C-Down>', ':m .+1<CR>==')
-xmap('<C-Up>', ':m .-2<CR>==')
+xmap("<C-Down>", ":m .+1<CR>==")
+xmap("<C-Up>", ":m .-2<CR>==")
 
--- UFO
-local ufo = require('ufo')
-nmap('<C-S-Space>', ufo.openAllFolds)
-nmap('<C-Space>', ufo.closeAllFolds)
+-- close buffers
+nmap("ZZ", ":qa!<CR>")
+nmap("zz", ":wq<CR>")
 
--- cokeline
-nmap('<C-Right>', '<Plug>(cokeline-focus-next)')
-nmap('<C-Left>', '<Plug>(cokeline-focus-prev)')
-nmap('<M-Left>', '<Plug>(cokeline-switch-prev)')
-nmap('<M-Right>', '<Plug>(cokeline-switch-next)')
-
-nmap('<leader>r', ':diffg RE')
-nmap('<leader>l', ':diffg LO')
-nmap('<leader>n', ']c')
-nmap('<leader>p', '[c')
+-- Mergetooling in git diff
+nmap("<leader>r", ":diffg RE<CR>", { silent = false })
+nmap("<leader>l", ":diffg LO<CR>", { silent = false })
+nmap("<leader>n", "]c", { silent = false })
+nmap("<leader>p", "[c", { silent = false })
 
 --nnoremap <C-l> :buffers!<CR>:buffer<Space>
 --noremap <silent> <C-d>b :diffg BA<CR>
@@ -70,4 +64,3 @@ nmap('<leader>p', '[c')
 --map <silent> <Leader>$ :e $MYVIMRC<CR>
 --
 --
-
