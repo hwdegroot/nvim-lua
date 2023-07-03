@@ -48,8 +48,8 @@ nmap('<leader>n', ']c', { silent = false })
 nmap('<leader>p', '[c', { silent = false })
 
 -- Folding
-nmap('<S-Space>', vim.cmd.foldclose)
-nmap('<Space>', vim.cmd.foldopen)
+--nmap('<S-Space>', vim.cmd.foldclose)
+--nmap('<Space>', vim.cmd.foldopen)
 
 
 

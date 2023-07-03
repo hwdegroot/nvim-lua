@@ -1,6 +1,7 @@
 local lspkind = require('lspkind')
 local types = require('cmp.types')
 local icons = require('config.icons')
+local vim = vim
 
 local cmp_status_ok, cmp = pcall(require, 'cmp')
 if not cmp_status_ok then
@@ -133,7 +134,7 @@ cmp.setup({
         ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-2), { 'i', 'c' }),
         ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-y>'] = cmp.config.disable,     -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ['<C-e>'] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
