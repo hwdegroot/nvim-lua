@@ -242,10 +242,15 @@ cmp.setup({
     -- You should specify your *installed* sources.
     sources = cmp.config.sources({
         {
+            name = "copilot",
+            group_index = 2,
+        },
+        {
             name = 'nvim_lsp',
-            priority = 10,
+            group_index = 2,
+            -- priority = 10,
             -- Limits LSP results to specific types based on line context (FIelds, Methods, Variables)
-            entry_filter = limit_lsp_types,
+            -- entry_filter = limit_lsp_types,
         },
         {
             name = 'npm',
@@ -275,10 +280,6 @@ cmp.setup({
         },
         {
             name = 'calc',
-            group_index = 2,
-        },
-        {
-            name = "copilot",
             group_index = 2,
         },
     }, {

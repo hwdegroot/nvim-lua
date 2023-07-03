@@ -69,22 +69,25 @@ packer.startup(function(use)
     use('hashicorp/terraform-ls')
 
     -- copilot and AI tools
-    use('github/copilot.vim')
-    --use({
-    --    'zbirenbaum/copilot.lua',
-    --    cmd = 'Copilot',
-    --    event = 'InsertEnter',
-    --    config = function()
-    --        require('copilot').setup()
-    --    end,
-    --})
-    --use({
-    --    'zbirenbaum/copilot-cmp',
-    --    after = 'copilot.lua',
-    --    config = function()
-    --        require('copilot_cmp').setup()
-    --    end,
-    --})
+    --use('github/copilot.vim')
+    use({
+        'zbirenbaum/copilot.lua',
+        cmd = 'Copilot',
+        event = 'InsertEnter',
+        config = function()
+            require('copilot').setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+            })
+        end,
+    })
+    use({
+        'zbirenbaum/copilot-cmp',
+        after = 'copilot.lua',
+        config = function()
+            require('copilot_cmp').setup({ })
+        end,
+    })
     use({
         'tzachar/cmp-tabnine',
         run = './install.sh',
