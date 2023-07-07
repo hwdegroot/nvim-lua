@@ -1,5 +1,5 @@
 -- Diagnostic config
-
+local icons, vim = require('config.icons').diagnostics, vim
 local codes = {
     -- Lua
     no_matching_function = {
@@ -118,11 +118,8 @@ vim.diagnostic.config({
 })
 
 -- UI
-
-local signs = { Error = "✘ ", Warn = " ", Hint = " ", Info = " " }
-
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
+for type, icon in pairs(icons) do
+    local hl = "DiagnosticSign" .. type:gsub("^%l", string.upper)
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 

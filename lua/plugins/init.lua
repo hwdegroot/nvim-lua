@@ -1,6 +1,17 @@
-local packer = require('packer')
+local packer, vim = require('packer'), vim
 
-vim.cmd([[packadd packer.nvim]])
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
 packer.startup(function(use)
     use('wbthomason/packer.nvim')
 
@@ -67,6 +78,7 @@ packer.startup(function(use)
     })
     -- terraform
     use('hashicorp/terraform-ls')
+    use('hashivim/vim-terraform')
 
     -- copilot and AI tools
     --use('github/copilot.vim')
@@ -85,7 +97,7 @@ packer.startup(function(use)
         'zbirenbaum/copilot-cmp',
         after = 'copilot.lua',
         config = function()
-            require('copilot_cmp').setup({ })
+            require('copilot_cmp').setup({})
         end,
     })
     use({
@@ -143,6 +155,11 @@ packer.startup(function(use)
         end,
         requires = { 'nvim-lua/plenary.nvim' },
     })
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end)
 
 require('plugins.sign').setup()

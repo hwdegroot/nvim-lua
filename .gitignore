@@ -2,3 +2,5 @@
 .vscode/
 .idea/
 plugin/packer_compiled.lua
+site/pack/packer/start/packer.nvim/
+site/pack/packer/opt/packer.nvim/

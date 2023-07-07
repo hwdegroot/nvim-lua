@@ -1,3 +1,4 @@
+require('config.clipboard')
 require('config.autocmd')
 require('config.colors')
 require('config.filetype')
