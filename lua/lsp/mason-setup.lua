@@ -30,6 +30,7 @@ local servers = {
     'graphql',
     'prismals',
     'terraformls',
+    --'textlsp',
 }
 mason_lsp.setup({
     -- A list of servers to automatically install if they're not already installed
