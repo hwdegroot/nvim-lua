@@ -126,6 +126,10 @@ packer.startup(function(use)
         run = ':TSUpdate',
     })
 
+    use({
+        'nvim-treesitter/nvim-treesitter-refactor',
+    })
+
     -- Fonts, themes and colorscehemes
     use({ 'ellisonleao/gruvbox.nvim' })
     use({ 'tanvirtin/monokai.nvim' })
@@ -202,4 +206,5 @@ require('plugins.devicons').setup()
 require('plugins.bufferline').setup()
 require('plugins.cmp-npm').setup()
 require('plugins.ufo').setup()
+require('plugins.treesitter-refactor')
 --require('plugins.null-ls').setup()

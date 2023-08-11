@@ -31,4 +31,4 @@ opt.termguicolors = true
 opt.updatetime = 250
 opt.wildmenu = true
 opt.swapfile = false
---opt.spell = true
+opt.spell = false

@@ -30,7 +30,7 @@ local sources = {
     --}),
     -- For additional configuration: https://cspell.org/configuration/
     code_actions.cspell,
-    formatting.prettier,
+    --formatting.prettier,
     -- setting eslint_d only if we have a eslintrc file in the project
     diagnostics.eslint_d.with({
         condition = function(utils)
@@ -40,10 +40,11 @@ local sources = {
 }
 
 function M.setup()
-    null_ls.setup({
-        debug = false,
-        sources = sources,
-    })
+    null_ls.setup()
+    --null_ls.setup({
+    --    debug = false,
+    --    sources = sources,
+    --})
 end
 
 return M

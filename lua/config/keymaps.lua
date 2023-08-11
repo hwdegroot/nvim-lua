@@ -1,6 +1,9 @@
 local vim = vim
 local utils = require('config.utils')
-local xmap, nmap = utils.xmap, utils.nmap
+local xmap, nmap, imap = utils.xmap, utils.nmap, utils.imap
+
+-- remap leader key
+vim.g.mapleader = '\\'
 
 -- telescope search
 local telescope = require('telescope.builtin')
@@ -48,25 +51,10 @@ nmap('<leader>n', ']c', { silent = false })
 nmap('<leader>p', '[c', { silent = false })
 
 -- Folding
---nmap('<S-Space>', vim.cmd.foldclose)
---nmap('<Space>', vim.cmd.foldopen)
+--nmap('zr', ':foldclose<CR>')
+--nmap('zR', ':foldopen<CR>')
 
-
-
---nnoremap <C-l> :buffers!<CR>:buffer<Space>
---noremap <silent> <C-d>b :diffg BA<CR>
---noremap <silent> <C-d>r :diffg RE<CR>
---noremap <silent> <C-d>l :diffg LO<CR>
---
---map <C-c> :bd<CR>:wincmd l<CR>
---nmap <Leader>v :vsplit<CR>
---nmap <Leader>h :split<CR>
---map <Leader>c ^I//<Esc>
---nmap <silent> <Leader><Up> :wincmd k<CR>
---nmap <silent> <Leader><Down> :wincmd j<CR>
---nmap <silent> <Leader>h :wincmd h<CR>
---nmap <silent> <Leader>l :wincmd l<CR>
---map <silent> <Leader>s :so $MYVIMRC<CR>:wincmd l<CR>
---map <silent> <Leader>$ :e $MYVIMRC<CR>
---
---
+-- Spell checking
+-- https://gcman105.medium.com/neovim-nvim-spell-checking-cc1c0d11dc1b
+nmap('<F3>', ':set spell!<CR>')
+imap('<F3>', '<C-O>:set spell!')
