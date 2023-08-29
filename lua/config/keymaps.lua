@@ -1,6 +1,7 @@
 local vim = vim
 local utils = require('config.utils')
 local xmap, nmap, imap = utils.xmap, utils.nmap, utils.imap
+local builtin = require('telescope.builtin')
 
 -- remap leader key
 vim.g.mapleader = '\\'
@@ -37,8 +38,8 @@ xmap('<Esc>[0;2C', '<S-Right>')
 xmap('<Esc>[1;2D', '<S-Left>')
 
 -- Move lines up and down
-xmap('<C-Down>', ':m .+1<CR>==')
-xmap('<C-Up>', ':m .-2<CR>==')
+nmap('<C-Down>', ':m .+1<CR>==')
+nmap('<C-Up>', ':m .-2<CR>==')
 
 -- close buffers
 nmap('ZZ', ':qa!<CR>')
@@ -58,3 +59,5 @@ nmap('<leader>p', '[c', { silent = false })
 -- https://gcman105.medium.com/neovim-nvim-spell-checking-cc1c0d11dc1b
 nmap('<F3>', ':set spell!<CR>')
 imap('<F3>', '<C-O>:set spell!')
+
+vim.api.nvim_set_keymap('n', '<C-space>', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })

@@ -3,7 +3,7 @@ local treesitter_refactor = require('nvim-treesitter.configs')
 
 treesitter_refactor.setup({
     refactor = {
-        highlight_current_scope = { enable = true },
+        --highlight_current_scope = { enable = true },
         smart_rename = {
             enable = true,
             -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.

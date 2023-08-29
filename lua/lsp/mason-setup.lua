@@ -23,10 +23,10 @@ local servers = {
     'tailwindcss',
     'cssls',
     'eslint',
-    'jsonls',
+    --'jsonls',
     'lua_ls',
     'bashls',
-    'html',
+    --'html',
     'graphql',
     'prismals',
     'terraformls',
@@ -48,7 +48,7 @@ local handlers = {
     ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' }),
     ['textDocument/publishDiagnostics'] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = false,
+            virtual_text = true,
             signs = true,
             update_in_insert = false,
             underline = true,

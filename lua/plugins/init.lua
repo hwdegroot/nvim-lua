@@ -151,6 +151,8 @@ packer.startup(function(use)
         },
     })
 
+    use({ 'folke/lsp-colors.nvim' })
+
     -- null-ls
     use({
         'jose-elias-alvarez/null-ls.nvim',
