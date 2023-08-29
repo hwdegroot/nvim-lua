@@ -81,7 +81,7 @@ local codes = {
 
 vim.diagnostic.config({
     float = {
-        source = false,
+        source = "if_many",
         format = function(diagnostic)
             local code = diagnostic.user_data.lsp.code
 
@@ -113,7 +113,8 @@ vim.diagnostic.config({
     underline = true,
     update_in_insert = false,
     virtual_text = {
-        prefix = ' 0 ',
+        -- source = "always",  -- Or "if_many"
+        prefix = '●', -- '▎', 'x' '●',
     },
 })
 
