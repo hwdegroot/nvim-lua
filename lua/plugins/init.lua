@@ -151,8 +151,6 @@ packer.startup(function(use)
         },
     })
 
-    use({ 'folke/lsp-colors.nvim' })
-
     -- null-ls
     use({
         'jose-elias-alvarez/null-ls.nvim',
@@ -209,4 +207,3 @@ require('plugins.bufferline').setup()
 require('plugins.cmp-npm').setup()
 require('plugins.ufo').setup()
 require('plugins.treesitter-refactor')
---require('plugins.null-ls').setup()

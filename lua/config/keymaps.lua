@@ -1,7 +1,6 @@
 local vim = vim
 local utils = require('config.utils')
 local xmap, nmap, imap = utils.xmap, utils.nmap, utils.imap
-local builtin = require('telescope.builtin')
 
 -- remap leader key
 vim.g.mapleader = '\\'
@@ -12,6 +11,9 @@ xmap('<C-p>', telescope.find_files)
 xmap('<C-t>g', telescope.live_grep)
 xmap('<C-t>b', telescope.buffers)
 xmap('<C-t>h', telescope.help_tags)
+xmap('<F2>', telescope.lsp_references, { silent = false })
+nmap("<F12>", vim.lsp.buf.definition, { silent = false })
+nmap("<C-f>", vim.lsp.buf.declaration, { silent = false })
 
 -- nvim-tree
 xmap('<C-n>', vim.cmd.NvimTreeToggle)

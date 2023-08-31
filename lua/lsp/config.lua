@@ -32,6 +32,7 @@ local codes = {
     },
     no_matching_variable = {
         message = " Can't find that variable",
+        icon = " ",
         "undefined-global",
         "reportUndefinedVariable",
     },
@@ -89,19 +90,16 @@ vim.diagnostic.config({
                 return string.format('%s', diagnostic.message)
             end
 
-            if diagnostic.source == 'eslint' then
-                for _, table in pairs(codes) do
-                    if vim.tbl_contains(table, code) then
-                        return string.format('%s [%s]', table.icon .. diagnostic.message, code)
-                    end
+            for _, table in pairs(codes) do
+                if vim.tbl_contains(table, code) then
+                    return string.format('%s [%s]', (table.icon or '') .. diagnostic.message, code)
                 end
-
-                return string.format('%s [%s]', diagnostic.message, code)
             end
+
 
             for _, table in pairs(codes) do
                 if vim.tbl_contains(table, code) then
-                    return table.message
+                    return string.format('%s [%s]', (table.icon or '') .. table.message, code)
                 end
             end
 
@@ -113,9 +111,9 @@ vim.diagnostic.config({
     underline = true,
     update_in_insert = false,
     virtual_text = {
-        -- source = "always",  -- Or "if_many"
+        source = "always", --"always",  -- Or "if_many"
         prefix = '●', -- '▎', 'x' '●',
-    },
+    }
 })
 
 -- UI

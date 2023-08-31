@@ -23,5 +23,3 @@ treesitter_refactor.setup({
     }
 })
 
-nmap("<Leader>gD", '<cmd>lua vim.lsp.buf.declaration()<CR>')
-nmap("<Leader>gd", '<cmd>lua vim.lsp.buf.definition()<CR>')
