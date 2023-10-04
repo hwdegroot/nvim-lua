@@ -162,6 +162,16 @@ packer.startup(function(use)
         requires = { 'nvim-lua/plenary.nvim' },
     })
 
+    use({
+        "prisma/vim-prisma"
+    })
+
+    use {
+        "vim-test/vim-test",
+        --config = function()
+        --    require('nvim-test').setup()
+        --end
+    }
     --use {
     --    "lewis6991/hover.nvim",
     --    config = function()
