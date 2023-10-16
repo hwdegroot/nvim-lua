@@ -166,12 +166,15 @@ packer.startup(function(use)
         "prisma/vim-prisma"
     })
 
-    use {
+    use({
         "vim-test/vim-test",
         --config = function()
         --    require('nvim-test').setup()
         --end
-    }
+    })
+
+    use({ "uiiaoo/java-syntax.vim" })
+    use({ "ejholmes/vim-forcedotcom" })
     --use {
     --    "lewis6991/hover.nvim",
     --    config = function()
