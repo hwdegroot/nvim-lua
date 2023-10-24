@@ -153,13 +153,20 @@ packer.startup(function(use)
 
     -- null-ls
     use({
-        'jose-elias-alvarez/null-ls.nvim',
+        "nvimtools/none-ls.nvim",
         after = "nvim-lspconfig",
         config = function()
-            require('plugins.null-ls').setup()
-            --require('null-ls').setup()
+            require("plugins.null-ls").setup()
         end,
-        requires = { 'nvim-lua/plenary.nvim' },
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "davidmh/cspell.nvim"
+        },
+
+    })
+
+    use({
+        "MunifTanjim/prettier.nvim"
     })
 
     use({
@@ -167,42 +174,25 @@ packer.startup(function(use)
     })
 
     use({
+        "lvimuser/lsp-inlayhints.nvim",
+    })
+    use({
         "vim-test/vim-test",
         --config = function()
         --    require('nvim-test').setup()
         --end
     })
 
+    -- toggle term
+    use({
+        "akinsho/toggleterm.nvim",
+        tag = '*',
+        config = function()
+            require("toggleterm").setup()
+        end
+    })
     use({ "uiiaoo/java-syntax.vim" })
     use({ "ejholmes/vim-forcedotcom" })
-    --use {
-    --    "lewis6991/hover.nvim",
-    --    config = function()
-    --        require("hover").setup {
-    --            init = function()
-    --                -- Require providers
-    --                require("hover.providers.lsp")
-    --                -- require('hover.providers.gh')
-    --                -- require('hover.providers.gh_user')
-    --                -- JIRA: https://github.com/ankitpokhrel/jira-cli
-    --                -- require('hover.providers.jira')
-    --                -- require('hover.providers.man')
-    --                -- require('hover.providers.dictionary')
-    --            end,
-    --            preview_opts = {
-    --                border = nil
-    --            },
-    --            -- Whether the contents of a currently open hover window should be moved
-    --            -- to a :h preview-window when pressing the hover keymap.
-    --            preview_window = false,
-    --            title = true
-    --        }
-
-    --        -- Setup keymaps
-    --        vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
-    --        vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
-    --    end
-    --}
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -220,3 +210,4 @@ require('plugins.bufferline').setup()
 require('plugins.cmp-npm').setup()
 require('plugins.ufo').setup()
 require('plugins.treesitter-refactor')
+require("plugins.lsp-inlayhints").setup()

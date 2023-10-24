@@ -1,4 +1,5 @@
 -- Setup installer & lsp configs
+local root_pattern = require('lspconfig').util.root_pattern
 local mason_ok, mason = pcall(require, 'mason')
 local mason_lsp_ok, mason_lsp = pcall(require, 'mason-lspconfig')
 local _, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
@@ -27,10 +28,10 @@ local servers = {
     'lua_ls',
     'bashls',
     --'html',
-    'apex_ls',
     'graphql',
     'prismals',
     'terraformls',
+    'apex_ls',
     --'textlsp',
 }
 mason_lsp.setup({
@@ -80,14 +81,19 @@ local opts = {
         apex_jar_path = '~/.local/share/nvim/plugins/apex_ls/apex-jorje-lsp.jar',
         apex_enable_semantic_errors = false,       -- Whether to allow Apex Language Server to surface semantic errors
         apex_enable_completion_statistics = false, -- Whether to allow Apex Language Server to collect telemetry on code completion usage
+        filetypes = { 'apex', 'apexcode', 'trigger' },
+        root_dir = root_pattern('sfdx-project.json'),
     }
 }
 -- loop through the servers
 for _, server in pairs(servers) do
-    local ls_opts = opts.default
+    local lsp_opts = opts.default
     if opts[server] ~= nil then
+        --lsp_opts = opts[server]
         for k, v in pairs(opts[server]) do
-            ls_opts[k] = v
+            if type(v) == "function" or type(v) == "table" then
+                lsp_opts[k] = v
+            end
         end
     end
 
@@ -95,7 +101,9 @@ for _, server in pairs(servers) do
     server = vim.split(server, '@')[1]
 
     -- pass them to lspconfig
-    lspconfig[server].setup(ls_opts)
+    lspconfig[server].setup(lsp_opts)
+    -- reset ls_opts
+    lsp_opts = {}
 end
 
 
