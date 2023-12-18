@@ -35,6 +35,11 @@ packer.startup(function(use)
         },
     })
 
+    -- silver searcher
+    use({
+        "rking/ag.vim"
+    })
+
     -- file browser
     use({
         'nvim-tree/nvim-tree.lua',
@@ -193,6 +198,9 @@ packer.startup(function(use)
     })
     use({ "uiiaoo/java-syntax.vim" })
     use({ "ejholmes/vim-forcedotcom" })
+
+    -- Eclipse java
+    use({ "mfussenegger/nvim-jdtls" })
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

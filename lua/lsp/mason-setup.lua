@@ -85,6 +85,10 @@ local opts = {
         root_dir = root_pattern('sfdx-project.json'),
     }
 }
+
+
+
+
 -- loop through the servers
 for _, server in pairs(servers) do
     local lsp_opts = opts.default
