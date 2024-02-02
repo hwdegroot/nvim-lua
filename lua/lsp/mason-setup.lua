@@ -4,6 +4,7 @@ local mason_ok, mason = pcall(require, 'mason')
 local mason_lsp_ok, mason_lsp = pcall(require, 'mason-lspconfig')
 local _, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 local vim = vim
+local jdtls_config = require("lsp.plugins.jdtls").setup
 
 if not mason_ok or not mason_lsp_ok then
     return
@@ -24,6 +25,7 @@ local servers = {
     'tailwindcss',
     'cssls',
     'eslint',
+    'jdtls',
     --'jsonls',
     'lua_ls',
     'bashls',
@@ -83,7 +85,8 @@ local opts = {
         apex_enable_completion_statistics = false, -- Whether to allow Apex Language Server to collect telemetry on code completion usage
         filetypes = { 'apex', 'apexcode', 'trigger' },
         root_dir = root_pattern('sfdx-project.json'),
-    }
+    },
+    jdtls = jstls_config,
 }
 
 

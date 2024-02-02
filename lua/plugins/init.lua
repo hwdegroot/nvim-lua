@@ -188,6 +188,8 @@ packer.startup(function(use)
         --end
     })
 
+    -- syntax
+    use({ 'jparise/vim-graphql' })
     -- toggle term
     use({
         "akinsho/toggleterm.nvim",
