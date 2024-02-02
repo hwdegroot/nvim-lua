@@ -5,6 +5,7 @@ local mason_lsp_ok, mason_lsp = pcall(require, 'mason-lspconfig')
 local _, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 local vim = vim
 local jdtls_config = require("lsp.plugins.jdtls").setup
+local pid = vim.fn.getpid()
 
 if not mason_ok or not mason_lsp_ok then
     return
@@ -23,6 +24,7 @@ mason.setup({
 local servers = {
     'tsserver',
     'tailwindcss',
+    'csharp_ls',
     'cssls',
     'eslint',
     'jdtls',
@@ -86,7 +88,14 @@ local opts = {
         filetypes = { 'apex', 'apexcode', 'trigger' },
         root_dir = root_pattern('sfdx-project.json'),
     },
-    jdtls = jstls_config,
+    jdtls = jdtls_config,
+    csharp_ls = {
+        handlers = {
+            ["textDocument/definition"] = require('csharpls_extended').handler,
+            ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
+        },
+        cmd = { "csharp-ls" },
+    }
 }
 
 

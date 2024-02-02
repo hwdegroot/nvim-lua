@@ -188,6 +188,8 @@ packer.startup(function(use)
         --end
     })
 
+    -- csharpls
+    use({ 'Decodetalkers/csharpls-extended-lsp.nvim' })
     -- syntax
     use({ 'jparise/vim-graphql' })
     -- toggle term
