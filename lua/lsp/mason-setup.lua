@@ -103,7 +103,7 @@ local opts = {
 
 -- loop through the servers
 for _, server in pairs(servers) do
-    local lsp_opts = opts.default
+    local lsp_opts = {}
     if opts[server] ~= nil then
         --lsp_opts = opts[server]
         for k, v in pairs(opts[server]) do
@@ -111,6 +111,8 @@ for _, server in pairs(servers) do
                 lsp_opts[k] = v
             end
         end
+    else
+      lsp_opts = opts.default
     end
 
     -- get the server name

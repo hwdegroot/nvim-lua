@@ -37,7 +37,7 @@ function M.setup()
 
             return newVirtText
         end,
-        close_fold_kinds = { "imports" },
+        close_fold_kinds_for_ft = { "imports" },
     })
     nmap('zR', ufo.openAllFolds)
     nmap('zM', ufo.closeAllFolds)

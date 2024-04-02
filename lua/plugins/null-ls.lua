@@ -1,28 +1,20 @@
 local vim = vim
 local M = {}
---local cspell = require("cspell")
 local null_ls = require("null-ls")
---if not null_ls_status_ok then
---    return
---end
 
 local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
+--local diagnostics = null_ls.builtins.diagnostics
 local completion = null_ls.builtins.completion
-local code_actions = null_ls.builtins.code_actions
 local hover = null_ls.builtins.hover
+local cspell = require('cspell')
 
 local sources = {
     hover.printenv,
     completion.spell,
     -- For additional configuration: https://cspell.org/configuration/
-    --code_actions.cspell,
-    code_actions.shellcheck,
-    code_actions.eslint_d,
-
-
-    formatting.eslint_d,
-    formatting.ruff,
+    -- https://github.com/davidmh/cspell.nvim
+    --cspell.diagnostics,
+    cspell.code_actions,
     formatting.prettierd.with({
         filetypes = {
             "javascript",
@@ -54,34 +46,15 @@ local sources = {
             })
         end
     }),
-
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#code-actions
-    -- https://github.com/streetsidesoftware/cspell
-    --diagnostics.cspell.with({
-    --    config = {
-    --        on_success = function(cspell_config_file)
-    --            -- format the cspell config file
-    --            os.execute(
-    --                string.format(
-    --                    "cat %s | jq -S '.words |= sort' | tee %s > /dev/null",
-    --                    cspell_config_file,
-    --                    cspell_config_file
-    --                )
-    --            )
-    --        end
-    --    },
-    --}),
-    --  setting eslint_d only if we have a eslintrc file in the project
-    diagnostics.eslint_d.with({
-        condition = function(utils)
-            return utils.root_has_file({
-                '.eslintrc.js',
-                'eslint.config.js',
-                '.eslintrc',
-            })
-        end
-    }),
-    diagnostics.ruff,
+    -- https://github.com/nvimtools/none-ls-extras.nvim/tree/main?tab=readme-ov-file#setup
+    require("none-ls.diagnostics.eslint_d"),
+    require("none-ls.formatting.eslint_d"),
+    require("none-ls.code_actions.eslint_d"),
+    -- https://github.com/gbprod/none-ls-shellcheck.nvim
+    require("none-ls-shellcheck.diagnostics"),
+    require("none-ls-shellcheck.code_actions"),
+    -- https://github.com/nvimtools/none-ls-extras.nvim?tab=readme-ov-file
+    require("none-ls.formatting.jq"),
 }
 
 M.sources = sources
