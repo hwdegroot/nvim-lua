@@ -1,4 +1,6 @@
 local packer, vim = require('packer'), vim
+-- For now it is broken, so we hack this in
+local web_devicons_commit = '93ddac6966d5d3416f96df728d7b92e27aaa4452'
 
 local ensure_packer = function()
   local fn = vim.fn
@@ -44,7 +46,7 @@ packer.startup(function(use)
   use({
     'nvim-tree/nvim-tree.lua',
     requires = {
-      'nvim-tree/nvim-web-devicons',       -- optional
+      { 'nvim-tree/nvim-web-devicons', commit = web_devicons_commit } -- optional
     },
   })
 
@@ -58,7 +60,7 @@ packer.startup(function(use)
     'akinsho/bufferline.nvim',
     tag = '*',
     requires = {
-      'nvim-tree/nvim-web-devicons',
+      { 'nvim-tree/nvim-web-devicons', commit = web_devicons_commit } -- optional
     },
   })
 
@@ -114,7 +116,7 @@ packer.startup(function(use)
   -- Automatic language servers for code completion
   use({
     'williamboman/mason.nvim',
-    run = ':MasonUpdate',     -- :MasonUpdate updates registry contents
+    run = ':MasonUpdate', -- :MasonUpdate updates registry contents
     'williamboman/mason-lspconfig.nvim',
   })
 
@@ -151,8 +153,7 @@ packer.startup(function(use)
     end,
     -- some optional icons
     requires = {
-      'nvim-tree/nvim-web-devicons',
-      opt = true,
+      { 'nvim-tree/nvim-web-devicons', commit = web_devicons_commit, opt = true, }
     },
   })
 
@@ -224,5 +225,5 @@ require('plugins.bufferline').setup()
 require('plugins.cmp-npm').setup()
 require('plugins.ufo').setup()
 require('plugins.treesitter-refactor')
-require("plugins.lsp-inlayhints").setup()
+--require("plugins.lsp-inlayhints").setup()
 require('plugins.ruff-lsp').setup()
