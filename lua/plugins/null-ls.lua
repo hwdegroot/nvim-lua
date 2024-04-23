@@ -47,24 +47,18 @@ local sources = {
     end
   }),
   -- https://github.com/nvimtools/none-ls-extras.nvim/tree/main?tab=readme-ov-file#setup
-  require("none-ls.diagnostics.eslint_d"),
-  require("none-ls.formatting.eslint_d"),
-  require("none-ls.code_actions.eslint_d").with({
+  require("none-ls.diagnostics.eslint_d").with({
     condition = function(utils)
       return utils.root_has_file({
         '.eslintrc',
-        '.eslintrc.js',
-        '.eslintrc.cjs',
-        '.eslintrc.yaml',
-        '.eslintrc.yml',
-        '.eslintrc.json',
-        'eslint.config.js',
-        'eslint.config.cjs',
         'eslint.config.mjs',
-        'package.json'
+        'eslint.config.cjs',
+        'eslint.config.js',
       })
     end
   }),
+  require("none-ls.code_actions.eslint_d"),
+  require("none-ls.formatting.eslint_d"),
   -- https://github.com/gbprod/none-ls-shellcheck.nvim
   require("none-ls-shellcheck.diagnostics"),
   require("none-ls-shellcheck.code_actions"),
