@@ -84,7 +84,10 @@ vim.diagnostic.config({
     float = {
         source = "if_many",
         format = function(diagnostic)
-            local code = diagnostic.user_data.lsp and diagnostic.user_data.lsp.code or nil
+            if not diagnostic then
+                return ""
+            end
+            local code = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.code or nil
 
             if not diagnostic.source or not code then
                 return string.format('%s', diagnostic.message)

@@ -16,6 +16,8 @@ autocmd({ "BufWritePre" }, { pattern = "*", command = "%s/\\s\\+$//e" })
 autocmd({ "CursorHold", "CursorHoldI" }, {
     pattern = "*",
     callback = function()
-        vim.diagnostic.open_float(nil, { focus = false, border = "rounded" })
+        if vim and vim.diagnostic then
+          vim.diagnostic.open_float(nil, { focus = false, border = "rounded" })
+        end
     end,
 })
