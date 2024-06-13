@@ -143,7 +143,7 @@ local icons = {
   diagnostics         = {
     error = " ",
     warn = "",
-    hint = "",
+    hint = "",
     info = "",
   }
 }

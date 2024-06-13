@@ -37,6 +37,11 @@ packer.startup(function(use)
     },
   })
 
+  use({
+    'fatih/vim-go',
+    run = ':GoUpdateBinaries',
+  })
+
   -- silver searcher
   use({
     "rking/ag.vim"
