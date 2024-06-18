@@ -39,6 +39,7 @@ local servers = {
   'omnisharp',
   'cmake',
   'clangd',
+  'nginx_language_server',
   --'textlsp',
 }
 mason_lsp.setup({
