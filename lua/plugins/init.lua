@@ -17,16 +17,20 @@ local packer_bootstrap = ensure_packer()
 packer.startup(function(use)
   use('wbthomason/packer.nvim')
 
-  --use({
-  --    'glepnir/dashboard-nvim',
-  --    event = 'VimEnter',
-  --    config = function()
-  --        require('dashboard').setup()
-  --    end,
-  --    requires = {
-  --        'nvim-tree/nvim-web-devicons',
-  --    },
-  --})
+  -- clang
+  use({ 'jackguo380/vim-lsp-cxx-highlight' })
+  use({ 'deoplete-plugins/deoplete-clang' })
+
+  use({
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup()
+    end,
+    requires = {
+      'nvim-tree/nvim-web-devicons',
+    },
+  })
 
   -- file search
   use({
@@ -87,6 +91,11 @@ packer.startup(function(use)
       'saadparwaiz1/cmp_luasnip',
       'David-Kunz/cmp-npm',
     },
+  })
+
+  use({
+    "L3MON4D3/LuaSnip",
+    run = "make install_jsregexp"
   })
   -- terraform
   use('hashicorp/terraform-ls')

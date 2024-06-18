@@ -37,6 +37,8 @@ local servers = {
   'terraformls',
   'apex_ls',
   'omnisharp',
+  'cmake',
+  'clangd',
   --'textlsp',
 }
 mason_lsp.setup({
@@ -92,10 +94,10 @@ local opts = {
   },
   jdtls = jdtls_config,
   csharp_ls = {
-    handlers = {
-      ["textDocument/definition"] = require('csharpls_extended').handler,
-      ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
-    },
+    --handlers = {
+    --  ["textDocument/definition"] = require('csharpls_extended').handler,
+    --  ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
+    --},
     cmd = { "csharp-ls" },
     capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
   },
@@ -109,20 +111,29 @@ local opts = {
       -- Mappings.
       -- See `:help vim.lsp.*` for documentation on any of the below functions
       local keymap_opts = { noremap = true, silent = true }
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', keymap_opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', keymap_opts)
+      --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', keymap_opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD',
+        '<cmd>lua require("omnisharp_extended").telescope_lsp_type_definition()<CR>', { noremap = true })
+      --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', keymap_opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F12>',
+        '<cmd>lua require("omnisharp_extended").telescope_lsp_definition({ jump_type = "vsplit" })<CR>',
+        { nnoremap = true })
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', keymap_opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', keymap_opts)
+      --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', keymap_opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F2>',
+        '<cmd>lua require("omnisharp_extended").telescope_lsp_implementation()<cr>', { noremap = true })
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', keymap_opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', keymap_opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>',
         keymap_opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl',
-        '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', keymap_opts)
+        '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', { noremap = true })
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', keymap_opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', keymap_opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', keymap_opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', keymap_opts)
+      --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', keymap_opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr',
+        '<cmd>lua require("omnisharp_extended").telescope_lsp_references()<CR>', { noremap = true })
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', keymap_opts)
     end
   },
