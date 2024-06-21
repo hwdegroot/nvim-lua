@@ -22,6 +22,7 @@ mason.setup({
 local servers = {
   'tsserver',
   'tailwindcss',
+  'omnisharp',
   'csharp_ls',
   'cssls',
   'eslint',
@@ -34,7 +35,6 @@ local servers = {
   'prismals',
   'terraformls',
   'apex_ls',
-  --'omnisharp',
   'cmake',
   'clangd',
   'nginx_language_server',
@@ -85,8 +85,7 @@ local opts = {
   },
   apex_ls = require("lsp.plugins.apex_ls"),
   jdtls = require("lsp.plugins.jdtls"),
-  csharp_ls = require("lsp.plugins.csharp_ls"),
-  --omnisharp = require("lsp.plugins.omnisharp"),
+  omnisharp = require("lsp.plugins.omnisharp"),
   --capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 }
 

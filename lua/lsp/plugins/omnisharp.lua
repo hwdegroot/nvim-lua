@@ -1,6 +1,12 @@
+local root_pattern = require('lspconfig').util.root_pattern
 local vim = vim
+local pid = vim.fn.getpid()
+local merge = require('config.utils').merge
+local csarpls = require('lsp.plugins.csharp_ls')
+
+
 local config = {
-  cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(pid) },
+  --cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(pid) },
   root_dir = root_pattern('*.sln'),
   on_attach = function(_, bufnr)
     -- Enable completion triggered by <c-x><c-o>
@@ -38,4 +44,6 @@ local config = {
   end
 }
 
-return config
+-- https://github.com/Decodetalkers/csharpls-extended-lsp.nvim?tab=readme-ov-file
+-- Append to the omnisharp config
+return merge(config, csarpls)
