@@ -116,12 +116,14 @@ local opts = {
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD',
         '<cmd>lua require("omnisharp_extended").telescope_lsp_type_definition()<CR>', { noremap = true })
       --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', keymap_opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F12>',
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd',
         '<cmd>lua require("omnisharp_extended").telescope_lsp_definition({ jump_type = "vsplit" })<CR>',
         { nnoremap = true })
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', keymap_opts)
       --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', keymap_opts)
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F4>',
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr',
+        '<cmd>lua require("omnisharp_extended").telescope_lsp_references()<cr>', { noremap = true })
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi',
         '<cmd>lua require("omnisharp_extended").telescope_lsp_implementation()<cr>', { noremap = true })
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', keymap_opts)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', keymap_opts)

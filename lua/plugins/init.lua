@@ -35,7 +35,7 @@ packer.startup(function(use)
   -- file search
   use({
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
+    tag = '0.1.4',
     requires = {
       'nvim-lua/plenary.nvim',
     },
@@ -205,6 +205,8 @@ packer.startup(function(use)
     --end
   })
 
+  -- -- omnisharp
+  use({ 'Hoffs/omnisharp-extended-lsp.nvim' })
   -- csharpls
   use({ 'Decodetalkers/csharpls-extended-lsp.nvim' })
   -- syntax

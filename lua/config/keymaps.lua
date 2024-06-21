@@ -12,7 +12,10 @@ xmap('<C-t>g', telescope.live_grep)
 xmap('<C-t>b', telescope.buffers)
 xmap('<C-t>h', telescope.help_tags)
 xmap('<F2>', telescope.lsp_references, { silent = false })
-nmap("<F12>", vim.lsp.buf.definition, { silent = false })
+xmap('<F4>', telescope.lsp_implementations, { silent = false })
+xmap('<F10>', telescope.lsp_type_definitions, { silent = false })
+xmap('<F12>', telescope.lsp_definitions, { silent = false })
+--nmap("<F12>", vim.lsp.buf.definition, { silent = false })
 nmap("<C-f>", vim.lsp.buf.declaration, { silent = false })
 
 -- nvim-tree
