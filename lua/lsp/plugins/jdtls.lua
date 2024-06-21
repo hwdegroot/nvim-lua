@@ -128,4 +128,4 @@ local jdtls_config = {
         bundles = {}
     },
 }
-return { setup = jdtls_config }
+return jdtls_config
