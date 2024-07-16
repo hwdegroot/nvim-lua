@@ -3,7 +3,10 @@ local utils = require('config.utils')
 local xmap, nmap, imap = utils.xmap, utils.nmap, utils.imap
 
 -- remap leader key
-vim.g.mapleader = '\\'
+vim.g.mapleader = ';'
+
+-- debugging
+
 
 -- telescope search
 local telescope = require('telescope.builtin')
@@ -20,6 +23,8 @@ nmap("<C-f>", vim.lsp.buf.declaration, { silent = false })
 
 -- nvim-tree
 xmap('<C-n>', vim.cmd.NvimTreeToggle)
+--nmap('<C-S-Up', vim.cmd.NvimTreeResize('20'))
+--nmap('<C-S-Down>', vim.cmd.NvimTreeResize('-20'))
 
 -- Undo tree
 xmap('<C-u>', vim.cmd.UndotreeToggle)
@@ -55,6 +60,7 @@ nmap('<leader>r', ':diffg RE<CR>', { silent = false })
 nmap('<leader>l', ':diffg LO<CR>', { silent = false })
 nmap('<leader>n', ']c', { silent = false })
 nmap('<leader>p', '[c', { silent = false })
+nmap('<Space>', 'za')
 
 -- Folding
 --nmap('zr', ':foldclose<CR>')

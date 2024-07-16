@@ -17,6 +17,10 @@ local packer_bootstrap = ensure_packer()
 packer.startup(function(use)
   use('wbthomason/packer.nvim')
 
+  -- debugging
+  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap",  "nvim-neotest/nvim-nio" } })
+  use({ 'mfussenegger/nvim-dap' })
+
   -- clang
   use({ 'jackguo380/vim-lsp-cxx-highlight' })
   use({ 'deoplete-plugins/deoplete-clang' })
@@ -51,6 +55,8 @@ packer.startup(function(use)
     "rking/ag.vim"
   })
 
+  -- zoxide
+  use({ 'nanotee/zoxide.vim' })
   -- file browser
   use({
     'nvim-tree/nvim-tree.lua',
@@ -243,3 +249,4 @@ require('plugins.ufo').setup()
 require('plugins.treesitter-refactor')
 --require("plugins.lsp-inlayhints").setup()
 require('plugins.ruff-lsp').setup()
+require('plugins.nvim-dap')
