@@ -18,7 +18,8 @@ packer.startup(function(use)
   use('wbthomason/packer.nvim')
 
   -- debugging
-  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap",  "nvim-neotest/nvim-nio" } })
+  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
+  use({ 'ms-jpq/debugpy', run = 'pip install debugpy' })
   use({ 'mfussenegger/nvim-dap' })
 
   -- clang
