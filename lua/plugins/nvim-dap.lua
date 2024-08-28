@@ -1,22 +1,35 @@
-local dap, dapui = require("dap"), require("dapui")
+local dap, dapui, dap_vscode = require("dap"), require("dapui"), require("plugins.nvim-dap-vscode")
 local vim = vim
 local nmap = require('config.utils').nmap
 
-dap.adapters.coreclr = {
-  type = 'executable',
-  command = '/usr/local/share/netcoredbg/netcoredbg',
-  args = { '--interpreter=vscode' }
+dap.adapters = {
+  coreclr = {
+    type = 'executable',
+    command = '/usr/local/share/netcoredbg/netcoredbg',
+    args = { '--interpreter=vscode' }
+  },
+  docker = {
+    type = 'server',
+    port = 5001,
+  }
 }
 
-dap.configurations.cs = {
-  {
-    type = "coreclr",
-    name = "launch - netcoredbg",
-    request = "launch",
-    program = function()
-      return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-    end,
+dap.configurations = {
+  cs = {
+    {
+      type = "coreclr",
+      name = "launch - netcoredbg",
+      request = "launch",
+      program = function()
+        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+      end,
+    }
   },
+  docker = {
+    type = 'docker',
+    request = 'attach',
+    mode = 'remote',
+  }
 }
 
 nmap('<F5>', dap.continue, { silent = false })
@@ -121,3 +134,6 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
+
+-- Use .vscode/launch.json files, if present
+dap_vscode.load_launchjs()
