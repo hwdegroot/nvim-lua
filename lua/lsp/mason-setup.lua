@@ -20,13 +20,14 @@ mason.setup({
 
 -- Order matters
 local servers = {
-  'tsserver',
+  --  'tsserver',
+  'ts_ls',
   'tailwindcss',
   'omnisharp',
   'csharp_ls',
   'cssls',
   'eslint',
-  'jdtls',
+  -- 'jdtls',
   --'jsonls',
   'lua_ls',
   'bashls',

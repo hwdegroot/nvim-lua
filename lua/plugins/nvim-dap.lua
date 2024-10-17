@@ -4,6 +4,7 @@ local nmap = require('config.utils').nmap
 
 dap.adapters = {
   coreclr = {
+    id = 'coreclr',
     type = 'executable',
     command = '/usr/local/share/netcoredbg/netcoredbg',
     args = { '--interpreter=vscode' }
@@ -20,9 +21,13 @@ dap.configurations = {
       type = "coreclr",
       name = "launch - netcoredbg",
       request = "launch",
-      program = function()
-        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-      end,
+      cwd = "${workspaceFolder}",
+      --program = function()
+      --  if vim.fn.findfile(vim.fn.getcwd() .. '.vscode/launch.json') then
+      --    return (vim.fn.getcwd() .. "")
+      --  end
+      --  return vim.fn.input('Path to dll: ', vim.fn.getcwd(), 'file')
+      --end,
     }
   },
   docker = {

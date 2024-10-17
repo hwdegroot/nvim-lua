@@ -140,6 +140,13 @@ packer.startup(function(use)
     'williamboman/mason-lspconfig.nvim',
   })
 
+  -- Node and npm
+  use {
+    "microsoft/vscode-js-debug",
+    opt = true,
+    run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+  }
+
   -- smart folding
   use({
     'kevinhwang91/nvim-ufo',
@@ -250,3 +257,4 @@ require('plugins.treesitter-refactor')
 --require("plugins.lsp-inlayhints").setup()
 require('plugins.ruff-lsp').setup()
 require('plugins.nvim-dap')
+
