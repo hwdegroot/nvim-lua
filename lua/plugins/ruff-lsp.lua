@@ -1,8 +1,8 @@
-local vim, utils, lspconfig = vim, require('config.utils'), require('lspconfig')
-local M, nmap, nnoremap = {}, utils.nmap, utils.nnoremap
+local lspconfig = require('lspconfig')
+local M = {}
 
 function M.setup()
-  lspconfig.ruff_lsp.setup {
+  lspconfig.ruff.setup {
     --  https://github.com/astral-sh/ruff-lsp
     init_options = {
       settings = {
@@ -14,4 +14,3 @@ function M.setup()
 end
 
 return M
-
