@@ -1,3 +1,7 @@
+-- When update failes because of unstaged changes
+-- stash lua/dashboard/theme/hyper.lua
+-- located in ~/.local/share/nvim/site/pack/packer/opt/dashboard-nvim
+-- THen git pull
 local M = {}
 
 function M.setup()

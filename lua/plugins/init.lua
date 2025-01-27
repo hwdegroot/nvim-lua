@@ -65,6 +65,9 @@ packer.startup(function(use)
     },
   })
 
+  -- dotenv
+  use { "ellisonleao/dotenv.nvim" }
+
   -- git
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
@@ -141,7 +144,7 @@ packer.startup(function(use)
   })
 
   -- Node and npm
-  use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
+  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
   use {
     "microsoft/vscode-js-debug",
     opt = true,
@@ -258,4 +261,4 @@ require('plugins.treesitter-refactor')
 --require("plugins.lsp-inlayhints").setup()
 require('plugins.ruff-lsp').setup()
 require('plugins.nvim-dap')
-
+require('plugins.dotenv').setup()
