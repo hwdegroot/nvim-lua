@@ -18,7 +18,7 @@ packer.startup(function(use)
   use('wbthomason/packer.nvim')
 
   -- debugging
-  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
+  use({ 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } })
   use({ 'mfussenegger/nvim-dap' })
 
   -- clang
@@ -52,7 +52,7 @@ packer.startup(function(use)
 
   -- silver searcher
   use({
-    "rking/ag.vim"
+    'rking/ag.vim'
   })
 
   -- zoxide
@@ -66,7 +66,7 @@ packer.startup(function(use)
   })
 
   -- dotenv
-  use { "ellisonleao/dotenv.nvim" }
+  use { 'ellisonleao/dotenv.nvim' }
 
   -- git
   use('mbbill/undotree')
@@ -103,8 +103,8 @@ packer.startup(function(use)
   })
 
   use({
-    "L3MON4D3/LuaSnip",
-    run = "make install_jsregexp"
+    'L3MON4D3/LuaSnip',
+    run = 'make install_jsregexp'
   })
   -- terraform
   use('hashicorp/terraform-ls')
@@ -144,12 +144,12 @@ packer.startup(function(use)
   })
 
   -- Node and npm
-  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
-  use {
-    "microsoft/vscode-js-debug",
+  use({ 'mxsdev/nvim-dap-vscode-js', requires = { 'mfussenegger/nvim-dap' } })
+  use({
+    'microsoft/vscode-js-debug',
     opt = true,
-    run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
-  }
+    run = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out'
+  })
 
   -- smart folding
   use({
@@ -190,37 +190,26 @@ packer.startup(function(use)
 
   -- null-ls
   use({
-    "nvimtools/none-ls.nvim",
-    after = "nvim-lspconfig",
+    'nvimtools/none-ls.nvim',
+    after = 'nvim-lspconfig',
     config = function()
-      require("plugins.null-ls").setup()
+      require('plugins.null-ls').setup()
     end,
     requires = {
-      "nvim-lua/plenary.nvim",
-      "davidmh/cspell.nvim",
-      "nvimtools/none-ls-extras.nvim",
-      "gbprod/none-ls-shellcheck.nvim",
+      'nvim-lua/plenary.nvim',
+      'davidmh/cspell.nvim',
+      'nvimtools/none-ls-extras.nvim',
+      'gbprod/none-ls-shellcheck.nvim',
     },
 
   })
 
-  use({
-    "MunifTanjim/prettier.nvim"
-  })
+  use({ 'MunifTanjim/prettier.nvim' })
 
-  use({
-    "prisma/vim-prisma"
-  })
+  use({ 'prisma/vim-prisma' })
 
-  use({
-    "lvimuser/lsp-inlayhints.nvim",
-  })
-  use({
-    "vim-test/vim-test",
-    --config = function()
-    --    require('nvim-test').setup()
-    --end
-  })
+  use({ 'lvimuser/lsp-inlayhints.nvim', })
+  use({ 'vim-test/vim-test', })
 
   -- -- omnisharp
   use({ 'Hoffs/omnisharp-extended-lsp.nvim' })
@@ -230,17 +219,65 @@ packer.startup(function(use)
   use({ 'jparise/vim-graphql' })
   -- toggle term
   use({
-    "akinsho/toggleterm.nvim",
+    'akinsho/toggleterm.nvim',
     tag = '*',
     config = function()
-      require("toggleterm").setup()
+      require('toggleterm').setup()
     end
   })
-  use({ "uiiaoo/java-syntax.vim" })
-  use({ "ejholmes/vim-forcedotcom" })
+  use({ 'uiiaoo/java-syntax.vim' })
+  use({ 'ejholmes/vim-forcedotcom' })
 
   -- Eclipse java
-  use({ "mfussenegger/nvim-jdtls" })
+  use({ 'mfussenegger/nvim-jdtls' })
+
+  use({
+    'folke/snacks.nvim',
+    requires = {
+      'folke/lazy.nvim'
+    },
+    config = function()
+      require('snacks').setup({
+        bigfile = { enabled = true },
+        dashboard = { enabled = true },
+        explorer = { enabled = true },
+        indent = { enabled = true },
+        input = { enabled = true },
+        notifier = { enabled = true, timeout = 3000 },
+        picker = { enabled = true },
+        quickfile = { enabled = true },
+        scope = { enabled = true },
+        scroll = { enabled = false },
+        statuscolumn = { enabled = true },
+        words = { enabled = true },
+        styles = {
+          notification = {
+            wo = { wrap = true } -- Wrap notifications
+          }
+        }
+      })
+    end,
+    --keys = {
+    --  -- Top Pickers & Explorer
+    --  { "",   function() require('snacks.picker').smart() end,                                   desc = "Smart Find Files" },
+    --  { ",",  function() require('snacks.picker').buffers() end,                                 desc = "Buffers" },
+    --  { "/",  function() require('snacks.picker').grep() end,                                    desc = "Grep" },
+    --  { ":",  function() require('snacks.picker').command_history() end,                         desc = "Command History" },
+    --  { "n",  function() require('snacks.picker').notifications() end,                           desc = "Notification History" },
+    --  { "e",  function() require('snacks.explorer').toggle() end,                                desc = "File Explorer" },
+    --  -- find
+    --  { "fb", function() require('snacks.picker').buffers() end,                                 desc = "Buffers" },
+    --  { "fc", function() require('snacks.picker').files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+    --  { "ff", function() require('snacks.picker').files() end,                                   desc = "Find Files" },
+    --  { "fg", function() require('snacks.picker').git_files() end,                               desc = "Find Git Files" },
+    --  { "fp", function() require('snacks.picker').projects() end,                                desc = "Projects" },
+    --  { "fr", function() require('snacks.picker').recent() end,                                  desc = "Recent" },
+    --  -- git
+    --  { "gb", function() require('snacks.picker').git_branches() end,                            desc = "Git Branches" },
+    --  { "gl", function() require('snacks.picker').git_log() end,                                 desc = "Git Log" },
+    --  { "gL", function() require('snacks.picker').git() end,                                     desc = "Git" }
+    --}
+  })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
