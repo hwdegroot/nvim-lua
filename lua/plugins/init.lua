@@ -25,16 +25,16 @@ packer.startup(function(use)
   use({ 'jackguo380/vim-lsp-cxx-highlight' })
   use({ 'deoplete-plugins/deoplete-clang' })
 
-  use({
-    'glepnir/dashboard-nvim',
-    event = 'VimEnter',
-    config = function()
-      require('dashboard').setup()
-    end,
-    requires = {
-      'nvim-tree/nvim-web-devicons',
-    },
-  })
+  --use({
+  --  'glepnir/dashboard-nvim',
+  --  event = 'VimEnter',
+  --  config = function()
+  --    require('dashboard').setup()
+  --  end,
+  --  requires = {
+  --    'nvim-tree/nvim-web-devicons',
+  --  },
+  --})
 
   -- file search
   use({
@@ -278,6 +278,60 @@ packer.startup(function(use)
     --  { "gL", function() require('snacks.picker').git() end,                                     desc = "Git" }
     --}
   })
+
+  use({
+    "nomnivore/ollama.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+
+    -- All the user commands added by the plugin
+    cmd = { "Ollama", "OllamaModel", "OllamaServe", "OllamaServeStop" },
+
+    config = function()
+      require('ollama').setup({
+        keys = {
+          -- Sample keybind for prompt menu. Note that the <c-u> is important for selections to work properly.
+          {
+            "<leader>oo",
+            ":<c-u>lua require('ollama').prompt()<cr>",
+            desc = "ollama prompt",
+            mode = { "n", "v" },
+          },
+
+          -- Sample keybind for direct prompting. Note that the <c-u> is important for selections to work properly.
+          {
+            "<leader>oG",
+            ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
+            desc = "ollama Generate Code",
+            mode = { "n", "v" },
+          },
+        },
+        opts = {
+           model = "mistral",
+           url = "http://127.0.0.1:11434",
+           serve = {
+             on_start = false,
+             command = "ollama",
+             args = { "serve" },
+             stop_command = "pkill",
+             stop_args = { "-SIGTERM", "ollama" },
+           },
+           -- View the actual default prompts in ./lua/ollama/prompts.lua
+           prompts = {
+             Sample_Prompt = {
+               prompt = "This is a sample prompt that receives $input and $sel(ection), among others.",
+               input_label = "> ",
+               model = "mistral",
+               action = "display",
+             }
+           }
+           -- your configuration overrides
+        }
+      })
+    end
+  })
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
