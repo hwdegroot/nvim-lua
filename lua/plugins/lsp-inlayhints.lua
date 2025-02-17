@@ -1,7 +1,6 @@
-local M = {}
-
-M.setup = function()
+return {
+  'lvimuser/lsp-inlayhints.nvim',
+  config = function()
     require("lsp-inlayhints").setup()
-end
-
-return M
+  end
+}

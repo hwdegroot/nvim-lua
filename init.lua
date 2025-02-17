@@ -1,4 +1,6 @@
+require('config.preload.keymaps')
+require('config.preload.lazy')
 require('config')
-require('plugins')
+--require('plugins')
 require('lsp')
 require('snippets')

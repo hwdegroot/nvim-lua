@@ -3,31 +3,8 @@ local utils = require('config.utils')
 local xmap, nmap, imap = utils.xmap, utils.nmap, utils.imap
 
 -- remap leader key
-vim.g.mapleader = ';'
+vim.g.mapleader = '\\'
 
--- debugging
-
-
--- telescope search
-local telescope = require('telescope.builtin')
-xmap('<C-p>', telescope.find_files)
-xmap('<C-t>g', telescope.live_grep)
-xmap('<C-t>b', telescope.buffers)
-xmap('<C-t>h', telescope.help_tags)
-xmap('<F2>', telescope.lsp_references, { silent = false })
-xmap('<F4>', telescope.lsp_implementations, { silent = false })
-xmap('<F10>', telescope.lsp_type_definitions, { silent = false })
-xmap('<F12>', telescope.lsp_definitions, { silent = false })
---nmap("<F12>", vim.lsp.buf.definition, { silent = false })
-nmap("<C-f>", vim.lsp.buf.declaration, { silent = false })
-
--- nvim-tree
-xmap('<C-n>', vim.cmd.NvimTreeToggle)
---nmap('<C-S-Up', vim.cmd.NvimTreeResize('20'))
---nmap('<C-S-Down>', vim.cmd.NvimTreeResize('-20'))
-
--- Undo tree
-xmap('<C-u>', vim.cmd.UndotreeToggle)
 
 -- Navigating through splits and tabs
 xmap('<C-Left>', vim.cmd.bprevious)
@@ -61,10 +38,6 @@ nmap('<leader>l', ':diffg LO<CR>', { silent = false })
 nmap('<leader>n', ']c', { silent = false })
 nmap('<leader>p', '[c', { silent = false })
 nmap('<Space>', 'za')
-
--- Folding
---nmap('zr', ':foldclose<CR>')
---nmap('zR', ':foldopen<CR>')
 
 -- Spell checking
 -- https://gcman105.medium.com/neovim-nvim-spell-checking-cc1c0d11dc1b

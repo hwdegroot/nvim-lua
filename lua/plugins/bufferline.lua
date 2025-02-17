@@ -1,11 +1,12 @@
-local utils = require('config.utils')
-local xmap = utils.xmap
-local M = {}
+local vim = vim
 
-M.setup = function ()
-    require("bufferline").setup{}
-    xmap('<C-Left>', vim.cmd.bprevious)
-    xmap('<C-Right>', vim.cmd.bnext)
-end
-
-return M
+return {
+  'akinsho/bufferline.nvim',
+  dependencies = {
+    { 'nvim-tree/nvim-web-devicons' }
+  },
+  keys = {
+    { '<C-Left>',  vim.cmd.bprevious, 'ivn' },
+    { '<C-Right>', vim.cmd.bnext,     'ivn' }
+  }
+}
