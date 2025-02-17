@@ -138,13 +138,13 @@ local eviline = {
       }
     }
 
-    gls.left[13] = {
-      SpellBad = {
-        provider = 'SpellBad',
-        icon = icons.spell .. ' ',
-        highlight = { colors.blue, colors.bg },
-      }
-    }
+    --gls.left[13] = {
+    --  SpellBad = {
+    --    provider = 'SpellBad',
+    --    icon = icons.spell .. ' ',
+    --    highlight = { colors.blue, colors.bg },
+    --  }
+    --}
 
     gls.right[1] = {
       ShowLspClient = {
