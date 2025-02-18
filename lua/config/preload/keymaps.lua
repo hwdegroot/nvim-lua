@@ -3,7 +3,7 @@ local utils = require('config.utils')
 local xmap, nmap, imap = utils.xmap, utils.nmap, utils.imap
 
 -- remap leader key
-vim.g.mapleader = '\\'
+-- vim.g.mapleader = '\\'
 
 
 -- Navigating through splits and tabs
