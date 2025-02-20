@@ -1,5 +1,5 @@
-local dap, dapui, dap_vscode = require("dap"), require("dapui"), require("config.plugins.nvim-dap-ext.vscode")
 local vim = vim
+local dap, dapui, dap_vscode = require("dap"), require("dapui"), require("config.plugins.nvim-dap-ext.vscode")
 local nmap = require('config.utils').nmap
 
 require("dap-vscode-js").setup({
@@ -89,8 +89,12 @@ dap.configurations = {
             stopOnEntry = false,
             runInTerminal = false,
             env = {
-                ASPNETCORE_ENVIRONMENT = "Development",
-                ASPNETCORE_URLS = "<https://localhost:5001>;<http://localhost:5000>"
+                ASPNETCORE_ENVIRONMENT = function()
+                    return vim.fn.input("ASPNETCORE_ENVIRONMENT: ", "Development")
+                end,
+                ASPNETCORE_URLS = function()
+                    return vim.fn.input("ASPCORE_URLS: ", "http://+:5000>")
+                end,
             },
             console = 'integratedTerminal',
         }
@@ -107,7 +111,7 @@ nmap('<F5>', dap.continue, { silent = false })
 nmap('<F6>', dap.step_over, { silent = false })
 nmap('<F7>', dap.step_into, { silent = false })
 nmap('<F8>', dap.step_out, { silent = false })
-nmap('<F11>', dap.toggle_breakpoint, { silent = false })
+nmap('<Leader>B', dap.toggle_breakpoint, { silent = false })
 --nmap('<Leader>B', dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')), { silent = false })
 --nmap('<Leader>lp', dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')), { silent = false })
 nmap('<Leader>dr', dap.repl.open, { silent = false })
@@ -207,7 +211,38 @@ vim.fn.sign_define('DapBreakpoint', {
     numhl =
     'DapBreakpoint'
 })
-vim.fn.sign_define('DapStopped', { text = '▶️', texthl = 'DapStopped', linehl = 'DapStopped', numhl = 'DapStopped' })
+--vim.fn.sign_define('DapStopped', {
+--    text = '▶️',
+--    texthl = 'DapStopped',
+--    linehl = 'DapStopped',
+--    numhl = 'DapStopped'
+--})
+
+vim.fn.sign_define("DapBreakpointCondition", {
+    text = "🟠",
+    texthl = "DapBreakpointCondition",
+    linehl = "",
+    numhl = ""
+})
+vim.fn.sign_define("DapLogPoint", {
+    text = "🟢",
+    texthl = "DapLogPoint",
+    linehl = "",
+    numhl = ""
+})
+vim.api.nvim_set_hl(0, "DapStopped", {
+  --bg = "#FF0000",
+  bg = "#5b2c32",
+  blend = 40,
+  --standout = true
+})
+vim.fn.sign_define('DapStopped', {
+    -- text = '',
+    text = "🫷",
+    texthl = 'DapStopped',
+    linehl = 'DapStopped',
+    numhl = 'DapStopped'
+})
 
 --toggle breakpoint
 --vim.api.nvim_set_keymap("n", "<leader>dt", ":DapToggleBreakpoint<CR>", { noremap = true })
