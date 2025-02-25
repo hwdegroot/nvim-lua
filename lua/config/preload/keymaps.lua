@@ -2,9 +2,6 @@ local vim = vim
 local utils = require('config.utils')
 local xmap, nmap, imap = utils.xmap, utils.nmap, utils.imap
 
--- remap leader key
--- vim.g.mapleader = '\\'
-
 
 -- Navigating through splits and tabs
 xmap('<C-Left>', vim.cmd.bprevious)
@@ -24,6 +21,9 @@ xmap('<Esc>[1;2B', '<S-Down>')
 xmap('<Esc>[0;2C', '<S-Right>')
 xmap('<Esc>[1;2D', '<S-Left>')
 
+-- find in files
+--xmap('<C-S-F>', ':Ag<CR>')
+
 -- Move lines up and down
 nmap('<C-Down>', ':m .+1<CR>==')
 nmap('<C-Up>', ':m .-2<CR>==')
@@ -37,7 +37,7 @@ nmap('<leader>r', ':diffg RE<CR>', { silent = false })
 nmap('<leader>l', ':diffg LO<CR>', { silent = false })
 nmap('<leader>n', ']c', { silent = false })
 nmap('<leader>p', '[c', { silent = false })
-nmap('<Space>', 'za')
+--nmap('<leader>z', 'za')
 
 -- Spell checking
 -- https://gcman105.medium.com/neovim-nvim-spell-checking-cc1c0d11dc1b
