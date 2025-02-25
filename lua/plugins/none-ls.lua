@@ -66,7 +66,6 @@ return {
     })
   end,
   dependencies = {
-
     'nvim-lua/plenary.nvim',
     'davidmh/cspell.nvim',
     'nvimtools/none-ls-extras.nvim',
