@@ -1,4 +1,3 @@
-local sources = {}
 local vim = vim
 
 return {
@@ -59,7 +58,9 @@ return {
         require("none-ls.formatting.eslint_d"),
         -- https://github.com/gbprod/none-ls-shellcheck.nvim
         require("none-ls-shellcheck.diagnostics"),
-        require("none-ls-shellcheck.code_actions"),
+        require("none-ls-shellcheck.code_actions").with({
+          filetypes = { "sh", ".env", ".env.*" },
+        }),
         -- https://github.com/nvimtools/none-ls-extras.nvim?tab=readme-ov-file
         require("none-ls.formatting.jq"),
       }
