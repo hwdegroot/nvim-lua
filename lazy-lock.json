@@ -18,7 +18,6 @@
   "csharpls-extended-lsp.nvim": { "branch": "master", "commit": "50d7a1dc539d9e0f28106fc238b7bc108cb8af16" },
   "cspell.nvim": { "branch": "main", "commit": "fb104ec1e06e984baefcad6a0559381f5d933442" },
   "deoplete-clang": { "branch": "master", "commit": "2ea262e98edcb66e828f9077fcc844100320eb63" },
-  "dotenv.nvim": { "branch": "main", "commit": "c47964243359e54613ac2774595271f3bd533f1e" },
   "galaxyline.nvim": { "branch": "main", "commit": "20f5f750002532a35193f55cd499074fc97d933d" },
   "gitsigns.nvim": { "branch": "main", "commit": "4c40357994f386e72be92a46f41fc1664c84c87d" },
   "gruvbox.nvim": { "branch": "main", "commit": "089b60e92aa0a1c6fa76ff527837cd35b6f5ac81" },
