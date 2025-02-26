@@ -11,7 +11,7 @@ autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.sshconfig', command = 'set f
 -- Salesforce filetype
 autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.cls,*.trigger,*.apex', command = 'set filetype=apex' })
 -- env file variants. Syntax file in ~/.config/nvim/syntax/env.vim
-autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.env,*.env.*', command = 'set filetype=env' })
+-- autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.env,*.env.*', command = 'set filetype=env' })
 -- got indentation differs from user preferred
 autocmd({ 'FileType' }, { pattern = 'go', command = 'set autoindent noexpandtab tabstop=4 shiftwidth=4' })
 -- C and C# indentation have different defaults than user preferred

@@ -1,5 +1,6 @@
 return {
   'ellisonleao/dotenv.nvim',
+  enabled = false,
   config = function()
     require('dotenv').setup({
       -- will load your .env file upon loading a buffer
