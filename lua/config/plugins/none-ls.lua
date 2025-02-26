@@ -6,7 +6,7 @@ require('null-ls').setup({
     -- For additional configuration: https://cspell.org/configuration/
     -- https://github.com/davidmh/cspell.nvim
     --cspell.diagnostics,
-    require('cspell').code_actions,
+    require('null-ls').builtins.code_actions.refactoring,
     require('null-ls').builtins.formatting.prettierd.with({
       filetypes = {
         "javascript",
@@ -58,5 +58,6 @@ require('null-ls').setup({
     }),
     -- https://github.com/nvimtools/none-ls-extras.nvim?tab=readme-ov-file
     require("none-ls.formatting.jq"),
+    require('cspell').code_actions,
   }
 })
