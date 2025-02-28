@@ -1,1 +1,1 @@
-return { 'tpope/vim-fugitive', enabled = false }
+return { 'tpope/vim-fugitive', enabled = true }
