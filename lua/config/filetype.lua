@@ -8,8 +8,6 @@ filetype off
 
 -- custom ssh.config files
 autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.sshconfig', command = 'set filetype=sshconfig' })
--- Salesforce filetype
-autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.cls,*.trigger,*.apex', command = 'set filetype=apex' })
 -- env file variants. Syntax file in ~/.config/nvim/syntax/env.vim
 autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.env,*.env.*', command = 'set filetype=env' })
 -- got indentation differs from user preferred

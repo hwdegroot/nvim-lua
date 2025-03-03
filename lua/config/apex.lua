@@ -1,6 +1,5 @@
 local vim = vim
 
---vim.cmd [[ au BufRead,BufNewFile *.cls,*.trigger,*.apex set filetype=apex ]]
 vim.g.ale_linters_explicit = 1
 vim.g.ale_fix_on_save = 1
 vim.g.ale_fixers = {
