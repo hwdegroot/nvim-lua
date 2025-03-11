@@ -1,3 +1,38 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
+vim.opt.relativenumber = false
+vim.opt.swapfile = false
+--breakpoint icons
+vim.fn.sign_define("DapBreakpoint", {
+  text = "🛑",
+  texthl = "DapBreakpoint",
+  linehl = "DapBreakpoint",
+  numhl = "DapBreakpoint",
+})
+
+vim.fn.sign_define("DapBreakpointCondition", {
+  text = "🟠",
+  texthl = "DapBreakpointCondition",
+  linehl = "",
+  numhl = "",
+})
+vim.fn.sign_define("DapLogPoint", {
+  text = "🟢",
+  texthl = "DapLogPoint",
+  linehl = "",
+  numhl = "",
+})
+vim.api.nvim_set_hl(0, "DapStopped", {
+  --bg = "#FF0000",
+  bg = "#5b2c32",
+  blend = 40,
+  --standout = true
+})
+vim.fn.sign_define("DapStopped", {
+  -- text = '',
+  text = "🫷",
+  texthl = "DapStopped",
+  linehl = "DapStopped",
+  numhl = "DapStopped",
+})
