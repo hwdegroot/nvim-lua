@@ -1,0 +1,4 @@
+  return {
+    'rking/ag.vim'
+  }
+
