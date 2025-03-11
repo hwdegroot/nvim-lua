@@ -1,0 +1,8 @@
+local jdtls_config = require("lsp.plugins.jdtls")
+local pkg_status, jdtls = pcall(require, "jdtls")
+local vim = vim
+if not pkg_status then
+  vim.notify("unable to load nvim-jdtls", "error")
+  return
+end
+jdtls.start_or_attach(jdtls_config)
