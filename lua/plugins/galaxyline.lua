@@ -104,7 +104,7 @@ local eviline = {
     gls.left[9] = {
       DiagnosticError = {
         provider = 'DiagnosticError',
-        icon = icons.diagnostics.error,
+        icon = ' ' .. icons.diagnostics.error .. ' ',
         --icon = '  ',
         highlight = { colors.red, colors.bg }
       }
@@ -112,7 +112,7 @@ local eviline = {
     gls.left[10] = {
       DiagnosticWarn = {
         provider = 'DiagnosticWarn',
-        icon = icons.diagnostics.warn .. ' ',
+        icon = ' ' .. icons.diagnostics.warn .. ' ',
         --icon = '  ',
         highlight = { colors.yellow, colors.bg },
       }
@@ -121,7 +121,7 @@ local eviline = {
     gls.left[11] = {
       DiagnosticHint = {
         provider = 'DiagnosticHint',
-        icon = icons.diagnostics.hint .. ' ',
+        icon = ' ' .. icons.diagnostics.hint .. ' ',
         --icon = '  ',
         highlight = { colors.cyan, colors.bg },
       }
@@ -130,7 +130,7 @@ local eviline = {
     gls.left[12] = {
       DiagnosticInfo = {
         provider = 'DiagnosticInfo',
-        icon = icons.diagnostics.info .. ' ',
+        icon = ' ' .. icons.diagnostics.info .. ' ',
         condition = function()
           return true
         end,

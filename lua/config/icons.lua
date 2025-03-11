@@ -141,9 +141,9 @@ local icons = {
   wrench              = "  ",
   -- 
   diagnostics         = {
-    error = " ",
-    warn = "",
-    hint = "",
+    error = "",
+    warn = "",
+    hint = "",
     info = "",
   }
 }
