@@ -1,5 +1,6 @@
 return {
   "mfussenegger/nvim-jdtls",
+  enabled = false,
   dependencies = { "folke/which-key.nvim" },
   opts = function()
     local cmd = { vim.fn.exepath("jdtls") }

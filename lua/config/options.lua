@@ -3,6 +3,7 @@
 -- Add any additional options here
 vim.opt.relativenumber = false
 vim.opt.swapfile = false
+vim.opt.wrap = true
 --breakpoint icons
 vim.fn.sign_define("DapBreakpoint", {
   text = "🛑",
