@@ -17,6 +17,7 @@ return {
       "cmake",
       "clangd",
       "nginx_language_server",
+      "sonarlint-language-server",
     },
   },
   config = function(_, opts)
@@ -34,5 +35,6 @@ return {
   build = ":MasonUpdate",
   {
     "williamboman/mason-lspconfig.nvim",
+    config = function() end,
   },
 }

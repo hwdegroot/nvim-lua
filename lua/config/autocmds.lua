@@ -12,6 +12,19 @@ autocmd({ "Syntax" }, { pattern = "*", command = "syn match ExtraWhitespace /\\s
 autocmd({ "ColorScheme" }, { pattern = "*", command = "highlight ExtraWhitespace ctermbg=red guibg=red" })
 autocmd({ "BufWritePre" }, { pattern = "*", command = "%s/\\s\\+$//e" })
 
+-- Set tabs and spaces for dotnet csproj files
+-- Disable autoformat for lua files
+autocmd({ "FileType" }, {
+  desc = "Set tabs and spaces for dotnet csproj files",
+  pattern = { "*.csproj" },
+  callback = function()
+    vim.opt.shiftwidth = 4
+    vim.opt.tabstop = 4
+    vim.opt.softtabstop = 4
+    vim.opt.expandtab = true
+  end,
+})
+
 -- lsp diagnostics
 --vim.cmd('autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, border="rounded"})')
 autocmd({ "CursorHold", "CursorHoldI" }, {
