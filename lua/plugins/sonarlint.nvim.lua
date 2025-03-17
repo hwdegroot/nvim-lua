@@ -1,12 +1,12 @@
 return {
   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
   after = { "neovim/nvim-lspconfig" },
-  event = "VeryLazy",
+  --event = "VeryLazy",
   config = function()
     require("sonarlint").setup({
       server = {
         cmd = {
-          "sonarlint-language-server",
+          vim.fn.expand("$MASON/bin/sonarlint-language-server"),
           -- Ensure that sonarlint-language-server uses stdio channel
           "-stdio",
           "-analyzers",
@@ -20,6 +20,11 @@ return {
           omnisharpDirectory = vim.fn.expand("$MASON/packages/sonarlint-language-server/extension/omnisharp"),
           csharpOssPath = vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcsharp.jar"),
           csharpEnterprisePath = vim.fn.expand("$MASON/share/sonarlint-analyzers/csharpenterprise.jar"),
+        },
+      },
+      connectedMode = {
+        ["https://sonarcloud.io"] = {
+          token = vim.fn.getenv("SONAR_TOKEN"),
         },
       },
       filetypes = {

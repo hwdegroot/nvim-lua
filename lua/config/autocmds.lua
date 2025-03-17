@@ -43,7 +43,7 @@ autocmd({ "BufRead", "BufNewFile" }, {
   group = group,
   callback = function(args)
     if vim and vim.diagnostic then
-      vim.diagnostic.enable(false, args.buf)
+      vim.diagnostic.enable(false, { bufnr = args.buf })
     end
   end,
 })
