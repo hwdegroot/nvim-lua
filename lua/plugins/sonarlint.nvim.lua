@@ -1,7 +1,7 @@
 return {
   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
   after = { "neovim/nvim-lspconfig" },
-  --event = "VeryLazy",
+  event = "VeryLazy",
   config = function()
     require("sonarlint").setup({
       server = {
