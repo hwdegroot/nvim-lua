@@ -10,7 +10,7 @@ return {
         { pattern = "translate", icon = " ", color = "blue" },
         { pattern = "keywords", icon = " ", color = "yellow" },
         { pattern = "docstring", icon = " ", color = "green" },
-        { pattern = "add tests", icon = " ", color = "orange" },
+        { pattern = "add tests", icon = " ", color = "green" },
         { pattern = "optimize code", icon = " ", color = "orange" },
         { pattern = "summarize", icon = " ", color = "white" },
         { pattern = "fix bugs", icon = " ", color = "red" },

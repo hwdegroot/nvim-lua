@@ -5,10 +5,9 @@ return {
     cmd = "ToggleTerm",
     keys = {
       {
-        "<Leader>T",
+        "<F4>",
         "<cmd>ToggleTerm<CR>",
         desc = "Toggle floating terminal",
-        icon = { icon = " ", color = "orange" },
       },
     },
     opts = {
