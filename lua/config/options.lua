@@ -4,6 +4,7 @@
 vim.opt.relativenumber = false
 vim.opt.swapfile = false
 vim.opt.wrap = true
+vim.g.autoformat = false
 --vim.lsp.inlay_hint.enabled = false
 --breakpoint icons
 --vim.fn.sign_define("DapBreakpoint", {
