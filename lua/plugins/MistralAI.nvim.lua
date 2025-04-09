@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   "hwdegroot/MistralAI.nvim",
   -- icons found in lua/plugins/which-key.nvim.lua
   -- see: https://github.com/LazyVim/LazyVim/discussions/4512
