@@ -8,6 +8,14 @@ return {
       "theHamsta/nvim-dap-virtual-text",
       opts = {},
     },
+    {
+      "williamboman/mason.nvim",
+      opts = { ensure_installed = { "delve" } },
+    },
+    {
+      "leoluz/nvim-dap-go",
+      opts = {},
+    },
   },
   -- stylua: ignore
   keys = {
