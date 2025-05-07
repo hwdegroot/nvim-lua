@@ -1,4 +1,17 @@
-require("dap-vscode-js").setup()
+require("dap-vscode-js").setup({
+  debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
+  adapters = { "pwa-node" },
+  node_path = os.getenv("NODE_PATH") or "node", -- Path for nodejs, defaults to $NODE_PATH, or "node"
+  debugger_cmd = { "js-debug-adapter", "js-debug-server" },
+  log_file_path = "/tmp/js-debug-adapter.log", -- Path to the log file
+  --console = "integratedTerminal",
+	log_file_level = vim.log.levels.ERROR,
+	  --log_file_level = false,
+	  --log_console_level = false,
+	  --log_console_level = vim.log.levels.ERROR,
+	  --log_console_level = vim.log.levels.WARN,
+	log_console_level = vim.log.levels.WARN,
+})
 
 -- https://github.com/mxsdev/nvim-dap-vscode-js?tab=readme-ov-file#configurations
 for _, language in ipairs({ "typescript", "javascript" }) do

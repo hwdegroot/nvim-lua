@@ -60,6 +60,6 @@ return {
     vscode.json_decode = function(str)
       return vim.json.decode(json.json_strip_comments(str))
     end
-    require("dap").defaults.fallback.exception_breakpoints = { "raised" }
+    require("dap").defaults.fallback.exception_breakpoints = "raised"
   end,
 }
