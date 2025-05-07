@@ -189,8 +189,8 @@ return {
               client.server_capabilities.semanticTokensProvider = {
                 full = true,
                 legend = {
-                  tokenTypes = semantic.tokenTypes,
-                  tokenModifiers = semantic.tokenModifiers,
+                  tokenTypes = semantic and semantic.tokenTypes or {},
+                  tokenModifiers = semantic and semantic.tokenModifiers or {},
                 },
                 range = true,
               }
@@ -295,14 +295,17 @@ return {
           return
         end
       end
-      require("lspconfig")[server].setup(server_opts)
+      local server_config = require("lspconfig")[server]
+      if server_config ~= nil and server_config.setup ~= nil then
+        server_config.setup(server_opts)
+      end
     end
 
     -- get all the servers that are available through mason-lspconfig
     local have_mason, mlsp = pcall(require, "mason-lspconfig")
     local all_mslp_servers = {}
     if have_mason then
-      all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+      all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings").lspconfig_to_package or {})
     end
 
     local ensure_installed = {} ---@type string[]
@@ -322,6 +325,7 @@ return {
 
     if have_mason then
       mlsp.setup({
+        automatic_enable = true,
         ensure_installed = vim.tbl_deep_extend(
           "force",
           ensure_installed,

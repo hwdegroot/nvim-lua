@@ -1,23 +1,53 @@
 return {
   "folke/which-key.nvim",
   opts = function(_, opts)
-    opts.icons = {
-      rules = {
-        { pattern = "mistral ai", icon = " ", color = "blue" },
-        { pattern = "chat avec le chat", icon = " ", color = "orange" },
-        { pattern = "ask le chat", icon = " ", color = "white" },
-        { pattern = "review code", icon = " ", color = "blue" },
-        { pattern = "enhance code", icon = " ", color = "green" },
-        { pattern = "change code", icon = " ", color = "orange" },
-        { pattern = "summarize text", icon = " ", color = "blue" },
-        { pattern = "generate text", icon = " ", color = "blue" },
-        { pattern = "change text", icon = " ", color = "blue" },
-        { pattern = "enhance spelling", icon = " ", color = "blue" },
-        { pattern = "enhance wording", icon = " ", color = "yellow" },
-        { pattern = "make concise", icon = " ", color = "green" },
-        { pattern = "make list", icon = " ", color = "green" },
-        { pattern = "make table", icon = " ", color = "red" },
+    table.insert(opts.spec, {
+      "<leader>m",
+      desc = "+tabnine",
+      group = "tabnine",
+      icon = {
+        icon = LazyVim.config.icons.kinds.TabNine,
+        color = "red",
       },
-    }
+    })
+    table.insert(opts.spec, {
+      "<Leader>mc",
+      "<cmd>TabnineChat<CR>",
+      desc = "TabNine Chat",
+      icon = {
+        icon = " ",
+        color = "white",
+      },
+    })
+    table.insert(opts.spec, {
+      "<Leader>mf",
+      "<cmd>TabnineFix<CR>",
+      desc = "TabNine Fix Code",
+      mode = { "n", "v" },
+      icon = {
+        icon = " ",
+        color = "blue",
+      },
+    })
+    table.insert(opts.spec, {
+      "<Leader>mt",
+      "<cmd>TabnineTest<CR>",
+      desc = "Tabnine Write Tests",
+      mode = { "n", "v" },
+      icon = {
+        icon = " ",
+        color = "green",
+      },
+    })
+    table.insert(opts.spec, {
+      "<Leader>me",
+      "<cmd>TabnineExplain<CR>",
+      desc = "TabNine Explain Code",
+      mode = { "n", "v" },
+      icon = {
+        icon = " ",
+        color = "yellow",
+      },
+    })
   end,
 }

@@ -1,5 +1,6 @@
 return {
   "hwdegroot/gen.nvim",
+  enabled = false,
   branch = "mistral-api",
   keys = {
     {
@@ -99,7 +100,7 @@ return {
     no_auto_close = false, -- Never closes the window automatically.
     file = false, -- Write the payload to a temporary file to keep the command short.
     hidden = false, -- Hide the generation window (if true, will implicitly set `prompt.replace = true`), requires Neovim >= 0.10
-    init = function() end,
+    init = function() return {} end,
     -- Function to initialize Ollama
     -- function(options)
     --   pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
@@ -142,6 +143,6 @@ return {
     -- (context property is optional).
     -- list_models = '<omitted lua function>', -- Retrieves a list of model names
     result_filetype = "markdown", -- Configure filetype of the result buffer
-    debug = false -- Prints errors and the command which is run.
+    debug = true -- Prints errors and the command which is run.
   }
 }
