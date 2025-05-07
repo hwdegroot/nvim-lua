@@ -14,7 +14,7 @@ return {
     },
     {
       "<Leader>ma",
-      "<cmd>Ask<CR>",
+      "<cmd>Gen Ask<CR>",
       desc = "Ask le Chat",
       mode = { "n", "v" },
     },
@@ -92,7 +92,7 @@ return {
     accept_map = "<c-cr>", -- set keymap to replace the previous selection with the last result
     protocol = "https",
     host = "api.mistral.ai", -- The host running the Ollama service.
-    port = "11434", -- The port on which the Ollama service is listening.
+    port = nil, -- The port on which the Ollama service is listening.
     display_mode = "float", -- The display mode. Can be "float" or "split" or "horizontal-split".
     show_prompt = false, -- Shows the prompt submitted to Ollama. Can be true (3 lines) or "full".
     show_model = false, -- Displays which model you are using at the beginning of your chat session.
@@ -107,13 +107,34 @@ return {
     command = function(options)
       local api_key = os.getenv("MISTRALAI_API_KEY")
       local body = {model = options.model, stream = true}
+      local location = options.protocol .. "://" .. options.host
+      if options.port ~= nil then
+        location = location .. ":" .. options.port
+      end
       return "curl " ..
         "--silent " ..
         "--no-buffer " ..
-        --"-X POST " ..
         "--header 'Authorization: Bearer " .. api_key .. "' " ..
-        "--location " .. options.protocol .. "://" .. options.host .. ":" .. options.port .. "/api/chat " ..
-        "--data '" .. body .. "'"
+        "--location " .. location .. "/v1/chat/completions " ..
+        "--data $body"
+        --"--data '" .. body .. "'"
+    end,
+    list_models = function()
+      return {
+        "codestral-latest",
+        "ministral-3b-latest",
+        "ministral-8b-latest",
+        "mistral-embed",
+        "mistral-moderation-latest",
+        "mistral-ocr-latest",
+        "mistral-saba-latest",
+        "mistral-small-latest",
+        "mistral-large-latest",
+        "open-codestral-mamba",
+        "open-mistral-nemo",
+        "pixtral-12b-2409",
+        "pixtral-large-latest",
+      }
     end,
     -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
     -- This can also be a command string.
