@@ -1,5 +1,6 @@
 return {
-  "David-Kunz/gen.nvim",
+  "hwdegroot/gen.nvim",
+  branch = "mistral-api",
   keys = {
     {
       "<Leader>m",
