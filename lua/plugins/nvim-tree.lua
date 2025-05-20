@@ -10,6 +10,7 @@ return {
       hijack_netrw = true,
       git = {
         enable = true,
+        ignore = false,
       },
       renderer = {
         highlight_git = true,
@@ -25,6 +26,7 @@ return {
         relativenumber = false,
       },
       filters = {
+        custom = { 'node_modules$' },
       },
     })
   end,
