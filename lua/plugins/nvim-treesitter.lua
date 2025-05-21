@@ -4,6 +4,7 @@ return {
     opts = function(_, opts)
       opts.ensure_installed = {
         "java",
+        "c_sharp",
       }
       vim.filetype.add({
         extension = {

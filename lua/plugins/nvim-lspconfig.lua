@@ -12,6 +12,7 @@ return {
   opts = function()
     ---@class PluginLspOpts
     local lspconfig = require("lspconfig")
+
     local ret = {
       -- options for vim.diagnostic.config()
       ---@type vim.diagnostic.Opts
@@ -69,6 +70,27 @@ return {
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
+        omnisharp = {
+          handlers = {
+            ["textDocument/definition"] = function(...)
+              return require("omnisharp_extended").handler(...)
+            end,
+          },
+          keys = {
+            {
+              "gd",
+              LazyVim.has("telescope.nvim") and function()
+                require("omnisharp_extended").telescope_lsp_definitions()
+              end or function()
+                require("omnisharp_extended").lsp_definitions()
+              end,
+              desc = "Goto Definition",
+            },
+          },
+          enable_roslyn_analyzers = true,
+          organize_imports_on_format = true,
+          enable_import_completion = true,
+        },
         eslint = {
           settings = {
             -- Helps ESLint find the eslintrc when it's placed in a subfolder instead of the cwd root
@@ -344,9 +366,10 @@ return {
 
     -- get all the servers that are available through mason-lspconfig
     local have_mason, mlsp = pcall(require, "mason-lspconfig")
+    local server_mapping = require("mason-lspconfig.mappings.server")
     local all_mslp_servers = {}
     if have_mason then
-      all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings").lspconfig_to_package or {})
+      all_mslp_servers = vim.tbl_keys(server_mapping.lspconfig_to_package or {})
     end
 
     local ensure_installed = {} ---@type string[]
