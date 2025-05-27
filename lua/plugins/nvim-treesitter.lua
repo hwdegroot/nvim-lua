@@ -3,6 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       opts.ensure_installed = {
+        "go",
         "java",
         "c_sharp",
       }
