@@ -1,4 +1,5 @@
 tt.*
+binaries/
 .tests
 doc/tags
 debug
