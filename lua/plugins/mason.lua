@@ -27,8 +27,7 @@ return {
       "sonarlint-language-server",
     },
   },
-  version = "v2.0.0",
-  config = function(_, opts)
+  config = function(_, _)
     require("mason").setup({
       ui = {
         -- The border to use for the UI window.
