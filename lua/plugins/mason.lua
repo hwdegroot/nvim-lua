@@ -27,6 +27,7 @@ return {
       "sonarlint-language-server",
     },
   },
+  version = "v2.0.0",
   config = function(_, opts)
     require("mason").setup({
       ui = {
