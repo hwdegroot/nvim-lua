@@ -47,3 +47,23 @@ autocmd({ "BufRead", "BufNewFile" }, {
     end
   end,
 })
+
+-- Add gitconfig highlighting for file.gitconfig
+-- Add sshconfig highlighting for file.sshconfig
+vim.filetype.add({
+  extension = {
+    gitconfig = "gitconfig",
+    sshconfig = "sshconfig",
+    env = "sh",
+  },
+  filename = {
+    [".env"] = "sh"
+  },
+  pattern = {
+    ["^.env$"] = "sh",
+    ["^.env%.local$"] = "sh",
+    ["^.env%.example$"] = "sh",
+    ["^.env%.dev$"] = "sh",
+    ["^.env%.prod$"] = "sh",
+  }
+})
