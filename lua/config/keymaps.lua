@@ -24,3 +24,22 @@ keymap("n", "<Leader>dl", require("dap").run_last, { silent = false })
 -- https://gcman105.medium.com/neovim-nvim-spell-checking-cc1c0d11dc1b
 keymap({ "n", "i" }, "<F3>", ":set spell!<CR>")
 keymap("n", "<C-space>", "<cmd>lua vim.diagnostic.setloclist()<CR>", { noremap = true, silent = true })
+
+-- NeoTree keymaps
+keymap(
+  {"n","i","v"},
+  "<C-n>",
+  function()
+    require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
+  end,
+  { silent = false}
+)
+keymap(
+  {"n","i","v"},
+  "<C-S-n>",
+  function()
+    require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+  end,
+  { silent = false}
+)
+

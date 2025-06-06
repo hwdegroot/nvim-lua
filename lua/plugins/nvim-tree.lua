@@ -33,9 +33,4 @@ return {
   dependencies = {
     { 'nvim-tree/nvim-web-devicons' }
   },
-  keys = {
-    { '<C-n>',      vim.cmd.NvimTreeToggle,                       'nvi' },
-    { '<C-S-Up',    function() vim.cmd.NvimTreeResize('20') end,  'n' },
-    { '<C-S-Down>', function() vim.cmd.NvimTreeResize('-20') end, 'n' }
-  }
 }
