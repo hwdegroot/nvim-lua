@@ -285,6 +285,10 @@ return {
           name = "calc",
           group_index = 2,
         },
+        {
+          name = "git",
+          group_index = 2,
+        },
       }, {
         {
           name = "buffer",
@@ -370,5 +374,6 @@ return {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "David-Kunz/cmp-npm",
+    "petertriho/cmp-git"
   },
 }
