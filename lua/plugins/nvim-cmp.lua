@@ -298,13 +298,6 @@ return {
           max_item_count = 5,
         },
       }),
-      cmp.setup.filetype("gitcommit", {
-        sources = cmp.config.sources({
-          { name = "git" },
-        }, {
-          { name = "buffer" },
-        }),
-      }),
       require("cmp_git").setup(),
       require("cmp-npm").setup({
         ignore = {},
@@ -338,6 +331,11 @@ return {
       experimental = {
         ghost_text = true,
       },
+    })
+    cmp.setup.filetype("codecompanion", {
+      sources = cmp.config.sources({
+        { name = "codecompanion" }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+      }),
     })
 
     -- Basic setup
