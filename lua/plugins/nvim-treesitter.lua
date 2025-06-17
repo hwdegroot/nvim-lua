@@ -6,6 +6,7 @@ return {
         "go",
         "java",
         "c_sharp",
+        "php",
       }
       vim.filetype.add({
         extension = {
