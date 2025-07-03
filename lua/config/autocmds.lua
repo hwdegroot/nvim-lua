@@ -25,6 +25,28 @@ autocmd({ "FileType" }, {
   end,
 })
 
+autocmd({ "FileType" }, {
+  desc = "Use tabs in nginx config files",
+  pattern = { "nginx" },
+  callback = function()
+    vim.opt.shiftwidth = 4
+    vim.opt.tabstop = 4
+    vim.opt.softtabstop = 4
+    vim.opt.expandtab = false
+  end,
+})
+
+-- In Makefiles use tabs
+autocmd({ "FileType" }, {
+  desc = "Use tabs makefile",
+  pattern = { "make" },
+  callback = function()
+    vim.opt.shiftwidth = 2
+    vim.opt.tabstop = 2
+    vim.opt.softtabstop = 2
+    vim.opt.expandtab = false
+  end,
+})
 
 -- lsp diagnostics
 --vim.cmd('autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, border="rounded"})')

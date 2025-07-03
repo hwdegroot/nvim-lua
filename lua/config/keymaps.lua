@@ -34,12 +34,4 @@ keymap(
   end,
   { silent = false}
 )
-keymap(
-  {"n","i","v"},
-  "<C-S-n>",
-  function()
-    require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
-  end,
-  { silent = false}
-)
 
