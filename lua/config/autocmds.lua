@@ -16,7 +16,8 @@ autocmd({ "BufWritePre" }, { pattern = "*", command = "%s/\\s\\+$//e" })
 -- Disable autoformat for lua files
 autocmd({ "FileType" }, {
   desc = "Set tabwith to 4 for specific filetypes",
-  pattern = { "*.csproj", "php", "python" },
+  pattern = { "*.csproj", "php", "python", "*.py" },
+
   callback = function()
     vim.opt.shiftwidth = 4
     vim.opt.tabstop = 4
@@ -47,6 +48,19 @@ autocmd({ "FileType" }, {
     vim.opt.expandtab = false
   end,
 })
+
+autocmd({ "FileType", "BufRead", "BufEnter", "BufNewFile" }, {
+  desc = "Set tabwith to 4 for specific filetypes",
+  pattern = { "*.csproj", "php", "python", "*.py" },
+
+  callback = function()
+    vim.opt.shiftwidth = 4
+    vim.opt.tabstop = 4
+    vim.opt.softtabstop = 4
+    vim.opt.expandtab = true
+  end,
+})
+
 
 -- lsp diagnostics
 --vim.cmd('autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, border="rounded"})')
