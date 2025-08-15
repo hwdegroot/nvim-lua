@@ -16,7 +16,7 @@ autocmd({ "BufWritePre" }, { pattern = "*", command = "%s/\\s\\+$//e" })
 -- Disable autoformat for lua files
 autocmd({ "FileType" }, {
   desc = "Set tabwith to 4 for specific filetypes",
-  pattern = { "*.csproj", "php" },
+  pattern = { "*.csproj", "php", "python" },
   callback = function()
     vim.opt.shiftwidth = 4
     vim.opt.tabstop = 4
@@ -78,6 +78,7 @@ vim.filetype.add({
     gitconfig = "gitconfig",
     sshconfig = "sshconfig",
     env = "sh",
+    releaserc = "json",
   },
   filename = {
     [".env"] = "sh"
