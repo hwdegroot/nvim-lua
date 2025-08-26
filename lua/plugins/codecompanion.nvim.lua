@@ -2,44 +2,44 @@ return {
   "olimorris/codecompanion.nvim",
   opts = {},
   config = function(_, opts)
-    require("codecompanion").setup({
-      extensions = {
-        mcphub = {
-          callback = "mcphub.extensions.codecompanion",
-          opts = {
-            show_result_in_chat = true,  -- Show mcp tool results in chat
-            make_vars = true,            -- Convert resources to #variables
-            make_slash_commands = true,  -- Add prompts as /slash commands
-          }
-        }
-      },
-      adapters = {
-        mistralai = function()
-          return require("codecompanion.adapters").extend("mistralai", {
-            env = {
-              api_key = os.getenv("MISTRALAI_API_KEY"),
-            },
-          })
-        end
-      },
-      strategies = {
-        chat = {
-          adapter = {
-            name = "mistralai",
-            model = "codestral",
-          },
-        inline = {
-          adapter = {
-            name = "mistralai",
-            model = "codestral",
-          },
-        },
-        },
-      },
-    })
+    --require("codecompanion").setup({
+    --  extensions = {
+    --    mcphub = {
+    --      callback = "mcphub.extensions.codecompanion",
+    --      opts = {
+    --        show_result_in_chat = true,  -- Show mcp tool results in chat
+    --        make_vars = true,            -- Convert resources to #variables
+    --        make_slash_commands = true,  -- Add prompts as /slash commands
+    --      }
+    --    }
+    --  },
+    --  adapters = {
+    --    mistralai = function()
+    --      return require("codecompanion.adapters").extend("mistralai", {
+    --        env = {
+    --          api_key = os.getenv("MISTRALAI_API_KEY"),
+    --        },
+    --      })
+    --    end
+    --  },
+    --  strategies = {
+    --    cmd = {
+    --      adapter = "mistralai",
+    --    },
+    --    chat = {
+    --      adapter = "mistralai",
+    --    },
+    --    inline = {
+    --      adapter = {
+    --        name = "mistralai",
+    --        model = "codestral-2508",
+    --      },
+    --    },
+    --  },
+    --})
   end,
   dependencies = {
-    "nvim-lua/plenary.nvim",
+    { "nvim-lua/plenary.nvim", branch = "master" },
     "nvim-treesitter/nvim-treesitter",
     {
       "MeanderingProgrammer/render-markdown.nvim",
