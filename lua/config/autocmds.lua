@@ -93,6 +93,7 @@ vim.filetype.add({
     sshconfig = "sshconfig",
     env = "sh",
     releaserc = "json",
+    mustache = "html",
   },
   filename = {
     [".env"] = "sh"
