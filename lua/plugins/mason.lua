@@ -1,5 +1,5 @@
 return {
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim",
   opts = {
     ensure_installed = {
       "gitui",
@@ -41,7 +41,7 @@ return {
   -- :MasonUpdate updates registry contents
   build = ":MasonUpdate",
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     config = function() end,
   },
 }

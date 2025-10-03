@@ -1,6 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    --priority = 40,
     opts = function(_, opts)
       opts.ensure_installed = {
         "go",

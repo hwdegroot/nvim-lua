@@ -2,9 +2,9 @@ return {
   "neovim/nvim-lspconfig",
   event = "LazyFile",
   dependencies = {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     {
-      "williamboman/mason-lspconfig.nvim",
+      "mason-org/mason-lspconfig.nvim",
       config = function() end,
     },
   },
@@ -196,6 +196,11 @@ return {
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
+        vuels = function(_, opts)
+          local vue_typescript_plugin_path = vim.fn.stdpath('data') .. '/mason/packages/vue-language-server/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin'
+          vim.notify(vue_typescript_plugin_path)
+          opts.root_dir = lspconfig.util.root_pattern("package.json", "vue.config.js", ".git")
+        end,
         eslint = function()
           if not (vim.g.lazyvim_eslint_auto_format == nil or vim.g.lazyvim_eslint_auto_format) then
             return
@@ -261,6 +266,8 @@ return {
           end, "gopls")
           -- end workaround
         end,
+        -- Specify * to use this function as a fallback for any server
+        ["*"] = function(server, opts) end,
       },
     }
     return ret
@@ -366,7 +373,7 @@ return {
 
     -- get all the servers that are available through mason-lspconfig
     local have_mason, mlsp = pcall(require, "mason-lspconfig")
-    local server_mapping = require("mason-lspconfig.mappings.server")
+    local server_mapping = require("mason-lspconfig.mappings").get_all()
     local all_mslp_servers = {}
     if have_mason then
       all_mslp_servers = vim.tbl_keys(server_mapping.lspconfig_to_package or {})
