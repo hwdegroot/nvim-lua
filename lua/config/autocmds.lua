@@ -8,23 +8,9 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 local autocmd = vim.api.nvim_create_autocmd
 
-autocmd({ "Syntax" }, { pattern = "*", command = "syn match ExtraWhitespace /\\s\\+$\\| \\+\\ze\\t/" })
+-- autocmd({ "Syntax" }, { pattern = "*", command = "syn match ExtraWhitespace /\\s\\+$\\| \\+\\ze\\t/" })
 autocmd({ "ColorScheme" }, { pattern = "*", command = "highlight ExtraWhitespace ctermbg=red guibg=red" })
 autocmd({ "BufWritePre" }, { pattern = "*", command = "%s/\\s\\+$//e" })
-
--- Set tabs and spaces for dotnet csproj files
--- Disable autoformat for lua files
-autocmd({ "FileType" }, {
-  desc = "Set tabwith to 4 for specific filetypes",
-  pattern = { "*.csproj", "php", "python", "*.py" },
-
-  callback = function()
-    vim.opt.shiftwidth = 4
-    vim.opt.tabstop = 4
-    vim.opt.softtabstop = 4
-    vim.opt.expandtab = true
-  end,
-})
 
 autocmd({ "FileType" }, {
   desc = "Use tabs in nginx config files",
@@ -49,6 +35,8 @@ autocmd({ "FileType" }, {
   end,
 })
 
+-- Set tabs and spaces for dotnet csproj files
+-- Disable autoformat for lua files
 autocmd({ "FileType", "BufRead", "BufEnter", "BufNewFile" }, {
   desc = "Set tabwith to 4 for specific filetypes",
   pattern = { "*.csproj", "php", "python", "*.py" },
