@@ -1,5 +1,9 @@
 return {
   "zbirenbaum/copilot.lua",
+  dependencies = {
+    "zbirenbaum/copilot-cmp",
+    "folke/snacks.nvim"
+  },
   cmd = "Copilot",
   build = ":Copilot auth",
   event = "BufReadPost",
